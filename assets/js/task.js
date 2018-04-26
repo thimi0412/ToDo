@@ -1,5 +1,11 @@
 let colortCnt = 0;
-$(function() {
+$(function () {
+    $(document).on('click', '.open-default', function(event) {
+        event.preventDefault();
+        $('#modal-default').iziModal('open');
+      });
+    $('#modal-default').iziModal();
+
     // タスク追加
     $('.add-btn').on('click', (evt) => {
         $('.task-list').append(
@@ -9,7 +15,7 @@ $(function() {
             <button class="edit-task">色変更</button>
             </div>
             </li>`
-        )
+        );
     });
 
     // タスク削除処理
@@ -17,10 +23,10 @@ $(function() {
         const isDelete = confirm('タスクを削除しますか？');
         if (isDelete) {
             $(evt.currentTarget).parent().parent()
-            .fadeOut(2000,() => {
-                $(evt.currentTarget).parent().parent().remove();
-            });
-            
+                .fadeOut(2000, () => {
+                    $(evt.currentTarget).parent().parent().remove();
+                });
+
         }
     });
 
@@ -39,7 +45,7 @@ $(function() {
  */
 function toDD(num) {
     num += '';
-    if(num.length === 1) {
+    if (num.length === 1) {
         num = '0' + num;
     }
     return num;
@@ -58,6 +64,6 @@ function getDate() {
     min = toDD(now.getMinutes());
     sec = toDD(now.getSeconds());
     let text = year + '/' + month + '/' + date + ' '
-                + hour +':'+ min +':'+ sec;
+        + hour + ':' + min + ':' + sec;
     return text;
 }
