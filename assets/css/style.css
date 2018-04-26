@@ -36,10 +36,11 @@ ul {
     margin: 50px;
 }
 .task {
-    font-size: 10px;
+    animation: fadeIn 2s ease 0s 1 normal;
+    font-size: 15px;
     width: 500px;
     height: 200px;
-    border: solid 2px #5b8bd0;/*点線*/
+    border: solid 2px #5b8bd0;
     display: flex;
     margin: 5px;
     flex-direction: row;
@@ -49,5 +50,46 @@ ul {
     linear-gradient(rgba(241,207,164,0.5) .1em, transparent .1em);
     background-size: 100% 1.5em;
     line-height:1.5em;
+    position: relative;
 
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+    
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1}
+    100% {opacity: 0}
+}
+    
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1}
+    100% {opacity: 0}
+}
+.task-btn {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 5px;
+}
+
+.del-btn {
+    font-size: 20px;
+    border: solid 2px #5b8bd0;
+    margin: 5px;
+}
+
+.edit-task {
+    font-size: 20px;
+    border: solid 2px #5b8bd0;
+    margin: 5px;
 }
