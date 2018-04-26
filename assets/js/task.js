@@ -8,14 +8,18 @@ $(function () {
 
     // タスク追加
     $('.add-btn').on('click', (evt) => {
+        const inputTask = $('.input-task').val();
         $('.task-list').append(
-            `<li class='task'>${getDate()}
+            `<li class='task'>${getDate()} <br>
+            <p class="task-info">${inputTask}</p>
             <div class="task-btn">
             <button class="del-btn">削除</button>
             <button class="edit-task">色変更</button>
             </div>
             </li>`
         );
+        $('#modal-default').iziModal('close');
+        $('.input-task').val('');
     });
 
     // タスク削除処理
@@ -23,7 +27,7 @@ $(function () {
         const isDelete = confirm('タスクを削除しますか？');
         if (isDelete) {
             $(evt.currentTarget).parent().parent()
-                .fadeOut(2000, () => {
+                .fadeOut(1000, () => {
                     $(evt.currentTarget).parent().parent().remove();
                 });
 
