@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=`, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/ress.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
     <title>Document</title>
 </head>
+
 <body>
     <header class="head-info">
-        <img src="assets/images/header.jpg" alt="ヘッダー画像">
+        <h1 class="head-h1">What is today's ToDo?</h1>
     </header>
-    <nav class="nav-info"></nav>
-    <aside class="left-bar"></aside>
+    <nav class="nav-info">
+
+    </nav>
+    <aside class="left-bar">
+        <h2 class="left-info">サイドバー</h2>
+        <ul class="side-task">
+            <li class="task-type">今日</li>
+            <li class="task-type">今週</li>
+            <li class="task-type">今年</li>
+        </ul>
+    </aside>
     <article class="main">
         <section class="main-board">
+            <button class="add-btn">追加</button>
+            <ul class="task-list"></ul>
 
         </section>
     </article>
     <aside class="task-info"></aside>
     <footer class="foo-info"></footer>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="assets/js/task.js"></script>
 </body>
+
 </html>

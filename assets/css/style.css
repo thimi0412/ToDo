@@ -1,0 +1,32 @@
+body {
+    height: 100%;
+    background: linear-gradient(rgb(5, 251, 255), 
+                                rgba(30, 0, 255, 0.246));
+  }
+ul {
+    list-style: none;
+}
+.head-info {
+    font-family: 'Bangers', cursive;
+    font-size: 50px;
+    text-align: center;
+    width: 950px;
+    margin: 0 auto;
+    padding: 65px 0 0;
+}
+.left-bar{
+    width: 300px;
+    float: left;
+}
+
+.left-bar {
+    height: 800px;
+    padding: 10px 10px;
+    margin: 10px;
+    background: #f0f7ff;
+    border: dashed 2px #5b8bd0;/*点線*/
+}
+.left-bar li {
+    margin: 0; 
+    padding: 0;
+}
