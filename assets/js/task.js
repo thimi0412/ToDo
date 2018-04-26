@@ -1,4 +1,3 @@
-let cnt = 1;
 let colortCnt = 0;
 const colorList = ['rgb(248, 164, 164)',
                     'rgb(163, 163, 248)',
@@ -6,7 +5,7 @@ const colorList = ['rgb(248, 164, 164)',
 $(function() {
     $('.add-btn').on('click', () => {
         $('.task-list').append(
-            `<li class='task'>${cnt}個目の追加
+            `<li class='task'>${getDate()}
             <button class="del-btn">削除</button>
             <button class="ch-color">色変更</button>
             </li>`
@@ -27,3 +26,25 @@ $(function() {
         }
     });
 })
+
+function toDD(num) {
+    num += '';
+    if(num.length === 1) {
+        num = '0' + num;
+    }
+    return num;
+};
+
+
+function getDate() {
+    const now = new Date();
+    year = now.getFullYear();
+    month = toDD(now.getMonth());
+    date = toDD(now.getDate())
+    hour = toDD(now.getHours());
+    min = toDD(now.getMinutes());
+    sec = toDD(now.getSeconds());
+    let text = year + '/' + month + '/' + date + ' '
+                + hour +':'+ min +':'+ sec;
+    return text;
+}

@@ -1,8 +1,9 @@
-body {
+html {
     height: 100%;
-    background: linear-gradient(rgb(5, 251, 255), 
-                                rgba(30, 0, 255, 0.246));
-  }
+    background: -moz-linear-gradient(to bottom,rgb(168, 244, 246),rgb(245, 99, 155) 10%,rgb(10, 51, 112)); 
+    background: -webkit-linear-gradient(to bottom,rgb(168, 244, 246), rgb(245, 99, 155) 30%,rgb(10, 51, 112)); 
+    background: linear-gradient(to bottom,rgb(168, 244, 246), rgb(245, 99, 155) 30%,rgb(10, 51, 112));
+}
 ul {
     list-style: none;
 }
@@ -22,11 +23,31 @@ ul {
 .left-bar {
     height: 800px;
     padding: 10px 10px;
-    margin: 10px;
+    margin: 50px;
     background: #f0f7ff;
     border: dashed 2px #5b8bd0;/*点線*/
 }
 .left-bar li {
     margin: 0; 
     padding: 0;
+}
+.main {
+    display: flex;
+    margin: 50px;
+}
+.task {
+    font-size: 10px;
+    width: 500px;
+    height: 200px;
+    border: solid 2px #5b8bd0;/*点線*/
+    display: flex;
+    margin: 5px;
+    flex-direction: row;
+    position: relative;
+    background-color: #ffffe7;
+    background-image:
+    linear-gradient(rgba(241,207,164,0.5) .1em, transparent .1em);
+    background-size: 100% 1.5em;
+    line-height:1.5em;
+
 }
