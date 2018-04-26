@@ -1,7 +1,7 @@
 let colortCnt = 0;
 $(function() {
-    // タスクの追加
-    $('.add-btn').on('click', () => {
+    // タスク追加
+    $('.add-btn').on('click', (evt) => {
         $('.task-list').append(
             `<li class='task'>${getDate()}
             <div class="task-btn">
@@ -9,7 +9,7 @@ $(function() {
             <button class="edit-task">色変更</button>
             </div>
             </li>`
-        );
+        )
     });
 
     // タスク削除処理
@@ -17,9 +17,7 @@ $(function() {
         const isDelete = confirm('タスクを削除しますか？');
         if (isDelete) {
             $(evt.currentTarget).parent().parent()
-            .css({
-                'animation': 'fadeOut 2s ease 0s 1 normal'
-            }).queue(function() {
+            .fadeOut(2000,() => {
                 $(evt.currentTarget).parent().parent().remove();
             });
             
