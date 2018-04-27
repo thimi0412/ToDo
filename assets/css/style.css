@@ -15,12 +15,13 @@ ul {
     margin: 0 auto;
     padding: 65px 0 0;
 }
+.wrapper {
+    display: flex;
+    position: relative;
+}
 .left-bar{
     width: 300px;
     float: left;
-}
-
-.left-bar {
     height: 800px;
     padding: 10px 10px;
     margin: 50px;
@@ -60,24 +61,26 @@ ul {
     margin: 50px;
 }
 
+.open-options {
+    position: absolute;
+    right: 20px;
+}
+
 .task {
     animation: fadeIn 1s ease 0s 1 normal;
     font-size: 15px;
-    width: 500px;
+    width: 700px;
     height: 200px;
     border: solid 2px #5b8bd0;
-    display: flex;
     padding: 10px;
     margin: 5px;
     flex-direction: row;
-    position: relative;
     background-color: #ffffe7;
     background-image:
     linear-gradient(rgba(241,207,164,0.5) .1em, transparent .1em);
     background-size: 100% 1.5em;
     line-height:1.5em;
     position: relative;
-
 }
 
 
@@ -110,4 +113,8 @@ ul {
     font-size: 20px;
     border: solid 2px #5b8bd0;
     margin: 5px;
+}
+.right-bar {
+    float: right;
+    margin: 20px;
 }

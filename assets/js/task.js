@@ -44,8 +44,16 @@ $(function () {
             $('#modal-options').iziModal('close');
             $('.input-task').val('');
         } else {
-            alert('期限日より前です');
-            $('#modal-options').iziModal('close');
+            $('#modal-alert').iziModal('open');
+            $('#modal-alert').iziModal({
+                headerColor: '#d43838',
+                width: 400,
+                autoOpen: true,
+                pauseOnHover: true,
+                timeoutProgressbar: true,
+                attached: 'bottom'
+            });
+
         }
     });
 
@@ -56,7 +64,7 @@ $(function () {
             $(evt.currentTarget).parent().parent()
                 .fadeOut(1000, () => {
                     $(evt.currentTarget).parent().parent().remove();
-            });
+                });
         }
     });
 

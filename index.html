@@ -18,34 +18,40 @@
     </header>
 
     <nav class="nav-info">
-        <button class="open-options button">options</button>
         <div id="modal-options" data-izimodal-group="group1" data-izimodal-loop="" data-izimodal-title="タスクを追加">
             <div class="input-main">
-                <p>このモーダルはオプション設定をしています
-                    <br>iframeモーダルとグループ設定しています</p>
                 <input type="text" class="input-task">
                 <input type="date" class="input-limit">
                 <button class="add-btn">追加</button>
             <!-- input-main --></div>
         <!-- modal-options --></div>
     <!-- nav-info --></nav>
+    <div id="modal-alert" data-izimodal-title="無効な日付です" data-izimodal-subtitle="test" ></div>
+    <div id="del-alert" data-izimodal-title="タスクを削除しますか？" data-izimodal-subtitle="test"></div>
 
-    <aside class="left-bar">
-        <h2 class="left-info">サイドバー</h2>
-        <ul class="side-task">
-            <li class="task-type">今日</li>
-            <li class="task-type">今週</li>
-            <li class="task-type">今年</li>
-        <!-- side-task --></ul>
-    <!-- left-bar --></aside>
-
-    <article class="main">
-        <section class="main-board">
-            <ul class="task-list"></ul>
-        </section>
-    <!-- main --></article>
-
-    <aside class="task-info"></aside>
+    <div class="wrapper">
+        <aside class="left-bar">
+            <h2 class="left-info">サイドバー</h2>
+            <ul class="side-task">
+                <li class="task-type">今日</li>
+                <li class="task-type">今週</li>
+                <li class="task-type">今年</li>
+            <!-- side-task --></ul>
+        <!-- left-bar --></aside>
+            
+        <article class="main">
+            <section class="main-board">
+                <ul class="task-list"></ul>
+            </section>
+        <!-- main --></article>
+            
+        <aside class="task-info">
+            <button class="open-options button">
+                <img src="assets/images/plus3.png" alt="Icon-Plus">
+            </button>
+        </aside>
+    </div>
+    
     <footer class="foo-info"></footer>
 
     <script src="assets/js/task.js"></script>
