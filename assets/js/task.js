@@ -30,16 +30,16 @@ $(function () {
             || getDate(getNow(inputLimit)) === getDate(getNow(nowDate))) {
             $('.task-list').append(
                 `<li class='task'>
-            <div class="task-text">
-                <p class="task-info">${inputTask}</p>
-                <p class="into-limit">期限 : ${getDate(getNow(inputLimit))}</p>
-            </div>
-            <div class="task-btn">
-                <p class="into-date">追加日 : ${getNow()}</p>
-                <button class="del-btn">削除</button>
-                <button class="edit-task">色変更</button>
-            </div>
-            </li>`
+                    <div class="task-text">
+                        <p class="task-info">${inputTask}</p>
+                        <p class="into-limit">期限 : ${getDate(getNow(inputLimit))}</p>
+                    </div>
+                    <div class="task-btn">
+                        <p class="into-date">追加日 : ${getNow()}</p>
+                        <button class="del-btn">削除</button>
+                        <button class="edit-task">色変更</button>
+                    </div>
+                </li>`
             );
             $('#modal-options').iziModal('close');
             $('.input-task').val('');
