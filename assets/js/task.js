@@ -1,6 +1,6 @@
 let colortCnt = 0;
 $(function () {
-    const inputLimit = new Date ($('.input-limit').val());
+    const inputLimit = new Date($('.input-limit').val());
 
     // modal
     $(document).on('click', '.open-options', function (event) {
@@ -22,7 +22,7 @@ $(function () {
         const inputTask = $('.input-task').val();
         const inputLimit = new Date($('.input-limit').val());
         const nowDate = new Date(getNow());
-        
+
         const a = getDate(getNow(inputLimit))
         console.log(a)
 
@@ -43,9 +43,11 @@ $(function () {
             );
             $('#modal-options').iziModal('close');
             $('.input-task').val('');
+        } else {
+            alert('期限日より前です');
+            $('#modal-options').iziModal('close');
         }
-
-    })
+    });
 
     // タスク削除処理
     $('.task-list').on('click', '.del-btn', (evt) => {
@@ -54,8 +56,7 @@ $(function () {
             $(evt.currentTarget).parent().parent()
                 .fadeOut(1000, () => {
                     $(evt.currentTarget).parent().parent().remove();
-                });
-
+            });
         }
     });
 
@@ -84,7 +85,7 @@ function toDD(num) {
  * 現在時刻を返す(yyyy/mm/dd HH:MM:ss)
  * @returns {string} text
  */
-function getNow(now=new Date()) {
+function getNow(now = new Date()) {
     year = now.getFullYear();
     month = toDD(now.getMonth() + 1);
     date = toDD(now.getDate());
@@ -100,7 +101,7 @@ function getNow(now=new Date()) {
  * 現在日付を取得(yyyy/mm/dd)
  * @returns {string} text
  */
-function getDate(now=getNow()) {
+function getDate(now = getNow()) {
     var date = now.split(' ')[0];
     const dateArray = date.split('/');
     const yyyymmdd = `${dateArray[0]}-${dateArray[1]}-${dateArray[2]}`;
