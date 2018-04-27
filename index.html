@@ -16,29 +16,35 @@
     <header class="head-info">
         <h1 class="head-h1">What is today's ToDo?</h1>
     </header>
+
     <nav class="nav-info">
         <button class="open-options button">options</button>
-        <div id="modal-options" data-izimodal-group="group1"
-        data-izimodal-loop="" data-izimodal-title="オプション設定モーダル">
-            <p>このモーダルはオプション設定をしています
-                <br>iframeモーダルとグループ設定しています</p>
+        <div id="modal-options" data-izimodal-group="group1" data-izimodal-loop="" data-izimodal-title="タスクを追加">
+            <div class="input-main">
+                <p>このモーダルはオプション設定をしています
+                    <br>iframeモーダルとグループ設定しています</p>
                 <input type="text" class="input-task">
+                <input type="date" class="input-limit">
                 <button class="add-btn">追加</button>
-        </div>
-    </nav>
+            <!-- input-main --></div>
+        <!-- modal-options --></div>
+    <!-- nav-info --></nav>
+
     <aside class="left-bar">
         <h2 class="left-info">サイドバー</h2>
         <ul class="side-task">
             <li class="task-type">今日</li>
             <li class="task-type">今週</li>
             <li class="task-type">今年</li>
-        </ul>
-    </aside>
+        <!-- side-task --></ul>
+    <!-- left-bar --></aside>
+
     <article class="main">
         <section class="main-board">
             <ul class="task-list"></ul>
         </section>
-    </article>
+    <!-- main --></article>
+
     <aside class="task-info"></aside>
     <footer class="foo-info"></footer>
 

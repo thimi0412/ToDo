@@ -32,8 +32,27 @@ ul {
     padding: 0;
 }
 
+.input-main {
+    width: 50%;
+    position: relative;
+}
+
 .input-task {
     padding: 5px;
+    border: solid 2px #5b8bd0;
+}
+
+.input-limit {
+    padding: 5px;
+    border: solid 2px #5b8bd0;
+}
+
+.add-btn {
+    border: solid 2px #5b8bd0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 5px;
 }
 
 .main {
@@ -48,6 +67,7 @@ ul {
     height: 200px;
     border: solid 2px #5b8bd0;
     display: flex;
+    padding: 10px;
     margin: 5px;
     flex-direction: row;
     position: relative;
@@ -59,6 +79,7 @@ ul {
     position: relative;
 
 }
+
 
 @keyframes fadeIn {
     0% {opacity: 0}

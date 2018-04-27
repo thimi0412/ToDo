@@ -1,32 +1,50 @@
 let colortCnt = 0;
 $(function () {
+    const inputLimit = new Date ($('.input-limit').val());
+
+    // modal
     $(document).on('click', '.open-options', function (event) {
         event.preventDefault();
         $('#modal-options').iziModal('open');
+        $('.input-limit').val(getDate());
     });
     $('#modal-options').iziModal({
         headerColor: '#26A69A', //ヘッダー部分の色
         width: 1000, //横幅
-        heigth: 5000,
+        padding: 50,
         overlayColor: 'rgba(0, 0, 0, 0.5)', //モーダルの背景色
         transitionIn: 'fadeInUp', //表示される時のアニメーション
         transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
     });
 
     // タスク追加
-    $('.add-btn').on('click', (evt) => {
+    $('.add-btn').on('click', () => {
         const inputTask = $('.input-task').val();
-        $('.task-list').append(
-            `<li class='task'>${getDate()} <br>
-            <p class="task-info">${inputTask}</p>
+        const inputLimit = new Date($('.input-limit').val());
+        const nowDate = new Date(getNow());
+        
+        const a = getDate(getNow(inputLimit))
+        console.log(a)
+
+        if (inputLimit.getTime() > nowDate.getTime()
+            || getDate(getNow(inputLimit)) === getDate(getNow(nowDate))) {
+            $('.task-list').append(
+                `<li class='task'>
+            <div class="task-text">
+                <p class="task-info">${inputTask}</p>
+                <p class="into-limit">期限 : ${getDate(getNow(inputLimit))}</p>
+            </div>
             <div class="task-btn">
-            <button class="del-btn">削除</button>
-            <button class="edit-task">色変更</button>
+                <p class="into-date">追加日 : ${getNow()}</p>
+                <button class="del-btn">削除</button>
+                <button class="edit-task">色変更</button>
             </div>
             </li>`
-        );
-        $('#modal-options').iziModal('close');
-        $('.input-task').val('');
+            );
+            $('#modal-options').iziModal('close');
+            $('.input-task').val('');
+        }
+
     })
 
     // タスク削除処理
@@ -63,13 +81,12 @@ function toDD(num) {
 };
 
 /**
- * 現在時刻を返す(yyyy/mm/dd/ HH:MM:ss)
+ * 現在時刻を返す(yyyy/mm/dd HH:MM:ss)
  * @returns {string} text
  */
-function getDate() {
-    const now = new Date();
+function getNow(now=new Date()) {
     year = now.getFullYear();
-    month = toDD(now.getMonth());
+    month = toDD(now.getMonth() + 1);
     date = toDD(now.getDate());
     hour = toDD(now.getHours());
     min = toDD(now.getMinutes());
@@ -77,4 +94,16 @@ function getDate() {
     let text = year + '/' + month + '/' + date + ' '
         + hour + ':' + min + ':' + sec;
     return text;
+}
+
+/**
+ * 現在日付を取得(yyyy/mm/dd)
+ * @returns {string} text
+ */
+function getDate(now=getNow()) {
+    var date = now.split(' ')[0];
+    const dateArray = date.split('/');
+    const yyyymmdd = `${dateArray[0]}-${dateArray[1]}-${dateArray[2]}`;
+
+    return yyyymmdd;
 }
