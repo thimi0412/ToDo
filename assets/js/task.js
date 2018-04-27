@@ -1,10 +1,17 @@
 let colortCnt = 0;
 $(function () {
-    $(document).on('click', '.open-default', function(event) {
+    $(document).on('click', '.open-options', function (event) {
         event.preventDefault();
-        $('#modal-default').iziModal('open');
-      });
-    $('#modal-default').iziModal();
+        $('#modal-options').iziModal('open');
+    });
+    $('#modal-options').iziModal({
+        headerColor: '#26A69A', //ヘッダー部分の色
+        width: 1000, //横幅
+        heigth: 5000,
+        overlayColor: 'rgba(0, 0, 0, 0.5)', //モーダルの背景色
+        transitionIn: 'fadeInUp', //表示される時のアニメーション
+        transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
+    });
 
     // タスク追加
     $('.add-btn').on('click', (evt) => {
@@ -18,9 +25,9 @@ $(function () {
             </div>
             </li>`
         );
-        $('#modal-default').iziModal('close');
+        $('#modal-options').iziModal('close');
         $('.input-task').val('');
-    });
+    })
 
     // タスク削除処理
     $('.task-list').on('click', '.del-btn', (evt) => {

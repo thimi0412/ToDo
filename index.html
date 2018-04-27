@@ -17,10 +17,13 @@
         <h1 class="head-h1">What is today's ToDo?</h1>
     </header>
     <nav class="nav-info">
-        <div id="modal-default">
-            <p>このモーダルウィンドウはデフォルト設定です</p>
-            <input type="text" class="input-task">
-            <button class="add-btn">追加</button>
+        <button class="open-options button">options</button>
+        <div id="modal-options" data-izimodal-group="group1"
+        data-izimodal-loop="" data-izimodal-title="オプション設定モーダル">
+            <p>このモーダルはオプション設定をしています
+                <br>iframeモーダルとグループ設定しています</p>
+                <input type="text" class="input-task">
+                <button class="add-btn">追加</button>
         </div>
     </nav>
     <aside class="left-bar">
@@ -31,7 +34,6 @@
             <li class="task-type">今年</li>
         </ul>
     </aside>
-    <button class="open-default">default</button>
     <article class="main">
         <section class="main-board">
             <ul class="task-list"></ul>

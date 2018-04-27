@@ -31,9 +31,11 @@ ul {
     margin: 0; 
     padding: 0;
 }
+
 .input-task {
     padding: 5px;
 }
+
 .main {
     display: flex;
     margin: 50px;
