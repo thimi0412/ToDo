@@ -1,7 +1,32 @@
 let colortCnt = 0;
 $(function () {
-    const inputLimit = new Date($('.input-limit').val());
 
+    $.ajax({
+        url: "http://localhost:8080/",
+        dataType: "json",
+        type: "GET",
+    }).done(function(res) {
+        // すでに存在するタスクを追加
+        $('.task-list').append(
+            `<li class='task'>
+                <div class="task-text">
+                    <p class="task-info">${res.title}</p>
+                    <p class="task-info-main">${res.title}</p>
+                    <p class="into-limit">期限 : ${res.limit}</p>
+                </div>
+                <div class="task-btn">
+                    <p class="into-date">追加日 : ${res.insert}</p>
+                    <button class="del-btn">削除</button>
+                    <button class="edit-task">色変更</button>
+                </div>
+            </li>`
+        );
+        console.log(Object.keys(res).length)
+    }).fail(function(res) {
+        console.log(res)
+    });
+
+    const inputLimit = new Date($('.input-limit').val());
     // modal
     $(document).on('click', '.open-options', function (event) {
         event.preventDefault();
@@ -20,11 +45,9 @@ $(function () {
     // タスク追加
     $('.add-btn').on('click', () => {
         const inputTask = $('.input-task').val();
+        const inputTaskMain = $('.input-task-main').val();
         const inputLimit = new Date($('.input-limit').val());
         const nowDate = new Date(getNow());
-
-        const a = getDate(getNow(inputLimit))
-        console.log(a)
 
         if (inputLimit.getTime() > nowDate.getTime()
             || getDate(getNow(inputLimit)) === getDate(getNow(nowDate))) {
@@ -32,6 +55,7 @@ $(function () {
                 `<li class='task'>
                     <div class="task-text">
                         <p class="task-info">${inputTask}</p>
+                        <p class="task-info-main">${inputTaskMain}</p>
                         <p class="into-limit">期限 : ${getDate(getNow(inputLimit))}</p>
                     </div>
                     <div class="task-btn">
@@ -43,6 +67,7 @@ $(function () {
             );
             $('#modal-options').iziModal('close');
             $('.input-task').val('');
+            $('.input-task-main').val('');
         } else {
             $('#modal-alert').iziModal('open');
             $('#modal-alert').iziModal({
@@ -116,3 +141,4 @@ function getDate(now = getNow()) {
 
     return yyyymmdd;
 }
+
