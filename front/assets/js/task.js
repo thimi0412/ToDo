@@ -1,28 +1,31 @@
 let colortCnt = 0;
 $(function () {
-
+    // ajax通信開始
     $.ajax({
-        url: "http://localhost:8080/",
-        dataType: "json",
         type: "GET",
-    }).done(function(res) {
-        // すでに存在するタスクを追加
-        $('.task-list').append(
-            `<li class='task'>
-                <div class="task-text">
-                    <p class="task-info">${res.title}</p>
-                    <p class="task-info-main">${res.title}</p>
-                    <p class="into-limit">期限 : ${res.limit}</p>
-                </div>
-                <div class="task-btn">
-                    <p class="into-date">追加日 : ${res.insert}</p>
-                    <button class="del-btn">削除</button>
-                    <button class="edit-task">色変更</button>
-                </div>
-            </li>`
-        );
+        url: "http://localhost:8080/get",
+        dataType: "json",
+    }).done(function (res) {
+        for (let i of res.result) {
+            // すでに存在するタスクを追加
+            $('.task-list').append(
+                `<li class='task'>
+                    <div class="task-text">
+                        <p class="task-info">${i.title}</p>
+                        <p class="task-info-main">${i.details}</p>
+                        <p class="into-limit">期限 : ${i.limit}</p>
+                    </div>
+                    <div class="task-btn">
+                        <p class="into-date">追加日 : ${i.insert}</p>
+                        <button class="del-btn">削除</button>
+                        <button class="edit-task">色変更</button>
+                    </div>
+                </li>`
+            );
+        }
+
         console.log(Object.keys(res).length)
-    }).fail(function(res) {
+    }).fail(function (res) {
         console.log(res)
     });
 
@@ -65,6 +68,19 @@ $(function () {
                     </div>
                 </li>`
             );
+
+            reqJson = {
+                title: inputTask,
+                details: inputTaskMain,
+                limit: inputLimit,
+                insert: nowDate,
+            };
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/set",
+                data: reqJson,
+                dataType: "json",
+            });
             $('#modal-options').iziModal('close');
             $('.input-task').val('');
             $('.input-task-main').val('');
