@@ -1,5 +1,7 @@
 import mysql.connector
 
+
+
 def conect():
     conn = mysql.connector.connect(user='root',
                                    password='',
@@ -42,9 +44,14 @@ def insert_task(Task):
 def update_task(Task):
     conn, cur = conect()
     sql = '''
+        UPDATE test.todo SET user_name = '{user_name}', task_title = '{title}', task_details = '{details}',
+        task_limit = Date('{limit}'), update_date = now()
+        WHERE id = {id}
         
     '''
-
+    cur.execute(sql)
+    conn.commit()
+    disconecrt(conn, cur)
     return 'succcess'
 
 def main():
