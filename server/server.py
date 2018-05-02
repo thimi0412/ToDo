@@ -32,7 +32,6 @@ def get_user():
     result = []
     for i in row:
         res_json = {
-            'id': i[0],
             'title' : i[2],
             'details': i[3],
             'limit': str(i[4]),
@@ -54,6 +53,11 @@ def set_task():
     task = Task.Task(title, details, limit, insert)
     res = db_conect.insert_task(task)
     return make_response(json.dumps({'status': res}, ensure_ascii=False))
+
+
+@api.route('/update', methods=['POST'])
+def update_task():
+    return 0
 
 if __name__ == '__main__':
     api.run(host='localhost', port=8080)

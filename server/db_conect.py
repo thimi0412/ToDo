@@ -1,8 +1,10 @@
 import mysql.connector
 
-
-
 def conect():
+    '''
+    MySQLに接続する
+    @return conn, cur
+    '''
     conn = mysql.connector.connect(user='root',
                                    password='',
                                   host='localhost',
@@ -12,6 +14,10 @@ def conect():
     return conn, cur
 
 def disconecrt(conn, cur):
+    '''
+    MySQLの接続を切断
+    @param conn, cur
+    '''
     cur.close()
     conn.close()
 
@@ -41,32 +47,22 @@ def insert_task(Task):
     return 'succcess'
 
 
-def update_task(Task):
+def update_task(Task, index):
     conn, cur = conect()
     sql = '''
-        UPDATE test.todo SET user_name = '{user_name}', task_title = '{title}', task_details = '{details}',
-        task_limit = Date('{limit}'), update_date = now()
+        UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = Date('{limit}'), update_date = now()
         WHERE id = {id}
-        
-    '''
+    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index)
     cur.execute(sql)
     conn.commit()
     disconecrt(conn, cur)
+
     return 'succcess'
 
+
 def main():
-    row = get_task()
-    result = []
-    for i in row:
-        json = {
-            'title' : i[2],
-            'details': i[3],
-            'limit': str(i[4]),
-            'insert': str(i[5]),
-        }
-        result.append(json)
-    res_json = {'result': result}
-    print(res_json)
+
+    return 0
 
 
 
