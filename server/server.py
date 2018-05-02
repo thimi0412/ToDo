@@ -67,7 +67,7 @@ def update_task():
     task = Task.Task(title, details, limit, insert)
     res = db_conect.update_task(task, index)
 
-    return 0
+    return make_response(json.dumps({'status': res}, ensure_ascii=False))
 
 if __name__ == '__main__':
     api.run(host='localhost', port=8080)
