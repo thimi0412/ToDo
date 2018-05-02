@@ -52,11 +52,21 @@ def set_task():
 
     task = Task.Task(title, details, limit, insert)
     res = db_conect.insert_task(task)
+
     return make_response(json.dumps({'status': res}, ensure_ascii=False))
 
 
 @api.route('/update', methods=['POST'])
 def update_task():
+    title = request.form['title']
+    details = request.form['details']
+    limit = format_date(request.form['limit'])
+    insert = format_date(request.form['insert'])
+    index = request.form['index']
+
+    task = Task.Task(title, details, limit, insert)
+    res = db_conect.update_task(task, index)
+
     return 0
 
 if __name__ == '__main__':

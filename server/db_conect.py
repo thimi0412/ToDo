@@ -61,8 +61,7 @@ def update_task(Task, index):
 
 
 def main():
-
-    return 0
+    pass
 
 
 
