@@ -52,6 +52,34 @@ ul {
     border: solid 2px #5b8bd0;
 }
 
+
+.edit-main {
+    width: 50%;
+    position: relative;
+}
+
+.edit-task {
+    padding: 5px;
+    border: solid 2px #5b8bd0;
+}
+.edit-task-main {
+    padding: 5px;
+    border: solid 2px #5b8bd0;
+}
+
+.edit-limit {
+    padding: 5px;
+    border: solid 2px #5b8bd0;
+}
+
+.edit-btn {
+    border: solid 2px #5b8bd0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 5px;
+}
+
 .add-btn {
     border: solid 2px #5b8bd0;
     position: absolute;

@@ -32,7 +32,8 @@ $(function () {
     $(document).on('click', '.open-options', function (event) {
         event.preventDefault();
         $('#modal-options').iziModal('open');
-        $('.input-limit').val(getDate());
+
+        $('.input-limit').val(getNow());
     });
     $('#modal-options').iziModal({
         headerColor: '#26A69A', //ヘッダー部分の色
@@ -48,6 +49,7 @@ $(function () {
         const inputTask = $('.input-task').val();
         const inputTaskMain = $('.input-task-main').val();
         const inputLimit = new Date($('.input-limit').val());
+        console.log(inputLimit)
         const nowDate = new Date(getNow());
 
         if (inputLimit.getTime() > nowDate.getTime()
@@ -96,10 +98,6 @@ $(function () {
         }
     });
 
-    $('li .edit-task').on('click', (evt) => {
-        var index = $('li .edit-task').index(evt.currentTarget);
-        console.log(index)
-    });
 
     // タスク削除処理
     $('.task-list').on('click', '.del-btn', (evt) => {
@@ -123,8 +121,19 @@ $(function () {
     $(document).on('click', '.edit-task', function (event) {
         event.preventDefault();
         $('#modal-options2').iziModal('open');
-        $('.input-limit').val(getDate());
-        console.log(taskId);
+        
+        const taskList = $('.task-list').children().eq(taskId);
+        editTitel = taskList.find('.task-info').text();
+        editDetails = taskList.find('.task-info-main').text();
+        editLimit = taskList.find('.into-limit').text().split(' ');
+        editInsert = taskList.find('.into-date').text();
+
+
+        editLimit = editLimit[2] + 'T' + editLimit[3]
+        
+        $('.edit-task').val(editTitel);
+        $('.edit-task-main').val(editDetails);
+        $('.edit-limit').val(editLimit);
     });
     $('#modal-options2').iziModal({
         headerColor: '#26A69A', //ヘッダー部分の色
@@ -135,6 +144,9 @@ $(function () {
         transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
     });
     // タスク更新処理
+    $('.edit-btn').on('click', () => {
+
+    });
 })
 
 
@@ -153,7 +165,7 @@ function toDD(num) {
 };
 
 /**
- * 現在時刻を返す(yyyy/mm/dd HH:MM:ss)
+ * 現在時刻を返す(yyyy-mm-dd HH:MM:ss)
  * @returns {string} text
  */
 function getNow(now = new Date()) {
@@ -163,7 +175,7 @@ function getNow(now = new Date()) {
     hour = toDD(now.getHours());
     min = toDD(now.getMinutes());
     sec = toDD(now.getSeconds());
-    let text = year + '/' + month + '/' + date + ' '
+    let text = year + '-' + month + '-' + date + 'T'
         + hour + ':' + min + ':' + sec;
     return text;
 }
@@ -174,7 +186,7 @@ function getNow(now = new Date()) {
  */
 function getDate(now = getNow()) {
     var date = now.split(' ')[0];
-    const dateArray = date.split('/');
+    const dateArray = date.split('-');
     const yyyymmdd = `${dateArray[0]}-${dateArray[1]}-${dateArray[2]}`;
 
     return yyyymmdd;
