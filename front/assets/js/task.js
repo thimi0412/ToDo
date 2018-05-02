@@ -18,7 +18,7 @@ $(function () {
                     <div class="task-btn">
                         <p class="into-date">追加日 : ${i.insert}</p>
                         <button class="del-btn">削除</button>
-                        <button class="edit-task">色変更</button>
+                        <button class="edit-task">変更</button>
                     </div>
                 </li>`
             );
@@ -62,7 +62,7 @@ $(function () {
                     <div class="task-btn">
                         <p class="into-date">追加日 : ${getNow()}</p>
                         <button class="del-btn">削除</button>
-                        <button class="edit-task">色変更</button>
+                        <button class="edit-task">変更</button>
                     </div>
                 </li>`
             );
@@ -96,6 +96,11 @@ $(function () {
         }
     });
 
+    $('li .edit-task').on('click', (evt) => {
+        var index = $('li .edit-task').index(evt.currentTarget);
+        console.log(index)
+    });
+
     // タスク削除処理
     $('.task-list').on('click', '.del-btn', (evt) => {
         const isDelete = confirm('タスクを削除しますか？');
@@ -107,11 +112,19 @@ $(function () {
         }
     });
 
+    // タスクのidを取得
+    let taskId;
+    $('.task-list').on('click', 'li .edit-task', (evt) => {
+        var index = $('li .edit-task').index(evt.currentTarget);
+        taskId = index;
+    });
+
     //タスク更新処理のmodal
     $(document).on('click', '.edit-task', function (event) {
         event.preventDefault();
         $('#modal-options2').iziModal('open');
         $('.input-limit').val(getDate());
+        console.log(taskId);
     });
     $('#modal-options2').iziModal({
         headerColor: '#26A69A', //ヘッダー部分の色
@@ -122,8 +135,6 @@ $(function () {
         transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
     });
     // タスク更新処理
-    $('.edit-btn').on('click', () => {
-    });
 })
 
 
