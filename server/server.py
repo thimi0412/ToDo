@@ -32,6 +32,7 @@ def get_user():
     result = []
     for i in row:
         res_json = {
+            'id': i[0],
             'title' : i[2],
             'details': i[3],
             'limit': str(i[4]),

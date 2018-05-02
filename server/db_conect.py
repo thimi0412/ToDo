@@ -25,6 +25,7 @@ def get_task():
     disconecrt(conn, cur)
     return row
 
+
 def insert_task(Task):
     conn, cur = conect()
     sql = '''
@@ -35,6 +36,15 @@ def insert_task(Task):
     conn.commit()
 
     disconecrt(conn, cur)
+    return 'succcess'
+
+
+def update_task(Task):
+    conn, cur = conect()
+    sql = '''
+        
+    '''
+
     return 'succcess'
 
 def main():
