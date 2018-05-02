@@ -23,14 +23,12 @@ $(function () {
                 </li>`
             );
         }
-
-        console.log(Object.keys(res).length)
     }).fail(function (res) {
         console.log(res)
     });
 
     const inputLimit = new Date($('.input-limit').val());
-    // modal
+    // タスク追加のmodal
     $(document).on('click', '.open-options', function (event) {
         event.preventDefault();
         $('#modal-options').iziModal('open');
@@ -109,9 +107,22 @@ $(function () {
         }
     });
 
+    //タスク更新処理のmodal
+    $(document).on('click', '.edit-task', function (event) {
+        event.preventDefault();
+        $('#modal-options2').iziModal('open');
+        $('.input-limit').val(getDate());
+    });
+    $('#modal-options2').iziModal({
+        headerColor: '#26A69A', //ヘッダー部分の色
+        width: 1000, //横幅
+        padding: 50,
+        overlayColor: 'rgba(0, 0, 0, 0.5)', //モーダルの背景色
+        transitionIn: 'fadeInUp', //表示される時のアニメーション
+        transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
+    });
     // タスク更新処理
-    $('.task-list').on('click', '.edit-task', (evt) => {
-        const isEdit = confirm('タスクを編集しますか？');
+    $('.edit-btn').on('click', () => {
     });
 })
 
