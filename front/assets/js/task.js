@@ -125,7 +125,6 @@ $(function () {
 
         // 更新を押したタスクの情報を取得
         const taskList = $('.task-list').children().eq(taskId);
-
         const editTitel = taskList.find('.task-info').text();
         const editDetails = taskList.find('.task-info-main').text();
         const editLimit = addT(taskList.find('.into-limit').text().split(' '));
@@ -147,6 +146,27 @@ $(function () {
     });
     // タスク更新処理
     $('.edit-btn').on('click', () => {
+        intoEditTitle = $('.edit-task').val();
+        intoEditDetails = $('.edit-task-main').val();
+        console.log(intoEditDetails)
+        intoEditLimit = $('.edit-limit').val();
+        intoEditInsert = new Date(getNow());
+
+        // リクエストを送るjsonを作成
+        reqJson = {
+            title: intoEditTitle,
+            details: intoEditDetails,
+            limit: intoEditLimit,
+            insert: intoEditInsert,
+            index : taskId,
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/update",
+            data: reqJson,
+            dataType: "json",
+        });
+        $('#modal-options2').iziModal('close');
     });
 })
 

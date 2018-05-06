@@ -52,7 +52,7 @@ def update_task(Task, index):
     sql = '''
         UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = Date('{limit}'), update_date = now()
         WHERE id = {id}
-    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index)
+    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index+1)
     cur.execute(sql)
     conn.commit()
     disconecrt(conn, cur)
