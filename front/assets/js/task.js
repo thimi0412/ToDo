@@ -49,7 +49,6 @@ $(function () {
         const inputTask = $('.input-task').val();
         const inputTaskMain = $('.input-task-main').val();
         const inputLimit = new Date($('.input-limit').val());
-        console.log(inputLimit)
         const nowDate = new Date(getNow());
 
         if (inputLimit.getTime() > nowDate.getTime()
@@ -59,16 +58,18 @@ $(function () {
                     <div class="task-text">
                         <p class="task-info">${inputTask}</p>
                         <p class="task-info-main">${inputTaskMain}</p>
-                        <p class="into-limit">期限 : ${getDate(getNow(inputLimit))}</p>
+                        <p class="into-limit">期限 : ${
+                            trimT(getDate(getNow(inputLimit)))}</p>
                     </div>
                     <div class="task-btn">
-                        <p class="into-date">追加日 : ${getNow()}</p>
+                        <p class="into-date">追加日 : ${trimT(getNow())}</p>
                         <button class="del-btn">削除</button>
                         <button class="edit-task">変更</button>
                     </div>
                 </li>`
             );
 
+            // リクエストを送るjsonを作成
             reqJson = {
                 title: inputTask,
                 details: inputTaskMain,
@@ -117,20 +118,21 @@ $(function () {
         taskId = index;
     });
 
-    //タスク更新処理のmodal
+    // タスク更新処理のmodal
     $(document).on('click', '.edit-task', function (event) {
         event.preventDefault();
         $('#modal-options2').iziModal('open');
-        
+
+        // 更新を押したタスクの情報を取得
         const taskList = $('.task-list').children().eq(taskId);
-        editTitel = taskList.find('.task-info').text();
-        editDetails = taskList.find('.task-info-main').text();
-        editLimit = taskList.find('.into-limit').text().split(' ');
-        editInsert = taskList.find('.into-date').text();
+
+        const editTitel = taskList.find('.task-info').text();
+        const editDetails = taskList.find('.task-info-main').text();
+        const editLimit = addT(taskList.find('.into-limit').text().split(' '));
+        const editInsert = taskList.find('.into-date').text().split(' ');
 
 
-        editLimit = editLimit[2] + 'T' + editLimit[3]
-        
+        // 入力フォームに事前に入れる
         $('.edit-task').val(editTitel);
         $('.edit-task-main').val(editDetails);
         $('.edit-limit').val(editLimit);
@@ -145,7 +147,6 @@ $(function () {
     });
     // タスク更新処理
     $('.edit-btn').on('click', () => {
-
     });
 })
 
@@ -185,10 +186,19 @@ function getNow(now = new Date()) {
  * @returns {string} text
  */
 function getDate(now = getNow()) {
-    var date = now.split(' ')[0];
+    const date = now.split(' ')[0];
     const dateArray = date.split('-');
     const yyyymmdd = `${dateArray[0]}-${dateArray[1]}-${dateArray[2]}`;
 
     return yyyymmdd;
 }
 
+
+function trimT(dateTime) {
+    dateTime = dateTime.split('T');
+    return dateTime[0] + ' ' + dateTime[1];
+}
+
+function addT(dateTime) {
+    return dateTime[2] + 'T' + dateTime[3];
+}
