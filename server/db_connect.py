@@ -70,27 +70,27 @@ def insert_task(Task):
     conn.commit()
 
     disconecrt(conn, cur)
-    return 'succcess'
+    return sql
 
 
 def update_task(Task, index):
     conn, cur = connect()
     sql = '''
-        UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = Date('{limit}'), update_date = now()
+        UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = '{limit}', update_date = now()
         WHERE id = {id}
-    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index)
+    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index+1)
     cur.execute(sql)
     conn.commit()
     disconecrt(conn, cur)
 
-    return 'succcess'
+    return sql
 
 
 def delete_task(index):
     conn, cur = connect()
     sql = '''
         DELETE FROM test.todo WHERE id = {id}
-    '''.format(id=index)
+    '''.format(id=index+1)
     cur.execute(sql)
     conn.commit()
 
