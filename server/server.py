@@ -113,4 +113,4 @@ def delete_task():
 
 
 if __name__ == '__main__':
-    api.run(host='localhost', port=8080)
+    api.run(host='0.0.0.0', port=8080)
