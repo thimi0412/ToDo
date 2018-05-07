@@ -2,7 +2,7 @@
 
 from flask import Flask, make_response, request
 import json
-import db_conect
+import db_connect
 import Task
 
 api = Flask(__name__)
@@ -52,7 +52,7 @@ def get_user():
     '''
     タスク全取得
     '''
-    row = db_conect.get_task()
+    row = db_connect.get_task()
 
     result = []
     for i in row:
@@ -80,7 +80,7 @@ def set_task():
     insert = format_date(request.form['insert'])
 
     task = Task.Task(title, details, limit, insert)
-    res = db_conect.insert_task(task)
+    res = db_connect.insert_task(task)
 
     return make_response(json.dumps({'status': res}, ensure_ascii=False))
 
@@ -97,9 +97,19 @@ def update_task():
     index = int(request.form['index'])
 
     task = Task.Task(title, details, limit, insert)
-    res = db_conect.update_task(task, index)
+    res = db_connect.update_task(task, index)
 
-    return make_response(json.dumps({'status': 'test'}, ensure_ascii=False))
+    return make_response(json.dumps({'status': res}, ensure_ascii=False))
+
+@api.route('/delete', methods=['POST'])
+def delete_task():
+    '''
+    削除処理
+    '''
+    index = int(request.form['index'])
+    res = db_connect.delete_task(index)
+
+    return make_response(json.dumps({'status': res}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

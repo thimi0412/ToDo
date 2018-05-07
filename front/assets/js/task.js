@@ -99,6 +99,12 @@ $(function () {
         }
     });
 
+    // タスクのidを取得
+    let taskId;
+    $('.task-list').on('click', 'li .edit-task', (evt) => {
+        var index = $('li .edit-task').index(evt.currentTarget);
+        taskId = index;
+    });
 
     // タスク削除処理
     $('.task-list').on('click', '.del-btn', (evt) => {
@@ -111,12 +117,6 @@ $(function () {
         }
     });
 
-    // タスクのidを取得
-    let taskId;
-    $('.task-list').on('click', 'li .edit-task', (evt) => {
-        var index = $('li .edit-task').index(evt.currentTarget);
-        taskId = index;
-    });
 
     // タスク更新処理のmodal
     $(document).on('click', '.edit-task', function (event) {
@@ -146,11 +146,10 @@ $(function () {
     });
     // タスク更新処理
     $('.edit-btn').on('click', () => {
-        intoEditTitle = $('.edit-task').val();
-        intoEditDetails = $('.edit-task-main').val();
-        console.log(intoEditDetails)
-        intoEditLimit = $('.edit-limit').val();
-        intoEditInsert = new Date(getNow());
+        const intoEditTitle = $('.edit-main .edit-task').val();
+        const intoEditDetails = $('.edit-main .edit-task-main').val();
+        const intoEditLimit = $('.edit-main .edit-limit').val();
+        const intoEditInsert = new Date(getNow());
 
         // リクエストを送るjsonを作成
         reqJson = {
@@ -166,6 +165,11 @@ $(function () {
             data: reqJson,
             dataType: "json",
         });
+        console.log(taskId);
+        const taskList2 = $('.task-list').children().eq(taskId);
+        taskList2.find('.task-info').text(intoEditTitle);
+        taskList2.find('.task-info-main').text(intoEditDetails);
+        taskList2.find('.into-limit').text('期限 : ' + trimT(intoEditLimit));
         $('#modal-options2').iziModal('close');
     });
 })

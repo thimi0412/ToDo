@@ -1,6 +1,6 @@
 import mysql.connector
 
-def conect():
+def connect():
     '''
     MySQLに接続する
     @return conn, cur
@@ -22,8 +22,34 @@ def disconecrt(conn, cur):
     conn.close()
 
 
+def fix_auto_increment_del(conn, cur):
+    '''
+    連番振り直し(削除)
+    '''
+    sql = '''
+        alter table test.todo drop column id;
+        '''
+    cur.execute(sql)
+    conn.commit()
+
+    disconecrt(conn, cur)
+
+
+def fix_auto_increment_add(conn, cur):
+    '''
+    連番振り直し(追加)
+    '''
+    sql = '''
+    alter table test.todo add id int(11) primary key not null auto_increment first;
+    '''
+    cur.execute(sql)
+    conn.commit()
+
+    disconecrt(conn, cur)
+
+
 def get_task():
-    conn, cur = conect()
+    conn, cur = connect()
 
     sql = "select * from test.todo"
 
@@ -35,7 +61,7 @@ def get_task():
 
 
 def insert_task(Task):
-    conn, cur = conect()
+    conn, cur = connect()
     sql = '''
         INSERT INTO test.todo(user_name, task_title, task_details, task_limit, insert_date, is_complete, del_flg)
         VALUES('{user_name}', '{title}', '{details}', '{limit}', now(), '0', '0')
@@ -48,11 +74,11 @@ def insert_task(Task):
 
 
 def update_task(Task, index):
-    conn, cur = conect()
+    conn, cur = connect()
     sql = '''
         UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = Date('{limit}'), update_date = now()
         WHERE id = {id}
-    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index+1)
+    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index)
     cur.execute(sql)
     conn.commit()
     disconecrt(conn, cur)
@@ -60,8 +86,26 @@ def update_task(Task, index):
     return 'succcess'
 
 
+def delete_task(index):
+    conn, cur = connect()
+    sql = '''
+        DELETE FROM test.todo WHERE id = {id}
+    '''.format(id=index)
+    cur.execute(sql)
+    conn.commit()
+
+    disconecrt(conn, cur)
+
+    
+    conn, cur = connect()
+    fix_auto_increment_del(conn, cur)
+    conn, cur = connect()
+    fix_auto_increment_add(conn, cur)
+
+    return 'succcess'
+
 def main():
-    pass
+    delete_task(1)
 
 
 
