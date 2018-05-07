@@ -1,0 +1,22 @@
+version: '2'
+services:
+  nginx:
+    image: "nginx"
+    ports:
+      - "80:80"
+    volumes:
+      - ./front/:/usr/share/nginx/html/
+        
+  db:
+    image: mysql
+    environment:
+#      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: test
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+      - ./mysql/migrate:/docker-entrypoint-initdb.d/
+      - ./mysql/conf.d:/etc/mysql/conf.d
+  server:
+      build: "./server"
+      ports:
+        - "8080:8080"
