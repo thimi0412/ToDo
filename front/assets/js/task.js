@@ -106,6 +106,10 @@ $(function () {
         var index = $('li .edit-task').index(evt.currentTarget);
         taskId = index;
     });
+    $('.task-list').on('click', 'li .del-btn', (evt) => {
+        var index = $('li .del-btn').index(evt.currentTarget);
+        taskId = index;
+    });
 
 
     // タスク更新処理のmodal
@@ -140,7 +144,7 @@ $(function () {
         const intoEditDetails = $('.edit-main .edit-task-main').val();
         const intoEditLimit = $('.edit-main .edit-limit').val();
         const intoEditInsert = new Date(getNow());
-
+        
         // リクエストを送るjsonを作成
         reqJson = {
             title: intoEditTitle,
@@ -177,7 +181,7 @@ $(function () {
         transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
     });
     //削除処理
-    $('.del-yes').on('click', () => {
+    $('.del-yes').on('click', (evt) => {
         reqJson = {
             index: taskId,
         };
@@ -188,6 +192,9 @@ $(function () {
             dataType: "json",
         });
         $('#modal-del').iziModal('close');
+
+        $('.task-list').children().eq(taskId).remove();
+
     });
     $('.del-no').on('click', () => {
         $('#modal-del').iziModal('close');
