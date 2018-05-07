@@ -18,6 +18,7 @@
     </header>
 
     <nav class="nav-info">
+        <!-- 追加modal -->
         <div id="modal-options" data-izimodal-group="group1" data-izimodal-loop="" data-izimodal-title="タスクを追加">
             <div class="input-main">
                 <input type="text" class="input-task" placeholder="タイトル">
@@ -26,7 +27,11 @@
                 <button class="add-btn">追加</button>
             <!-- input-main --></div>
         <!-- modal-options --></div>
+        
+        <!-- 警告modal -->
         <div id="modal-alert" data-izimodal-title="無効な日付です" data-izimodal-subtitle="test" ></div>
+
+        <!-- 更新modal -->
         <div id="modal-options2" data-izimodal-group="group2" data-izimodal-loop="" data-izimodal-title="タスクを更新">
             <div class="edit-main">
                 <input type="text" class="edit-task">
@@ -36,6 +41,13 @@
             <!-- edit-main --></div>
         <!-- modal-options2 --></div>
 
+        <!-- 削除modal -->
+        <div id="modal-del" data-izimodal-group="group3" data-izimodal-loop="" data-izimodal-title="タスクを削除しました">
+            <div class="del-main">
+                <button class="del-yes">はい</button>
+                <button class="del-no">いいえ</button>
+            </div>
+        <!-- modal-del --></div>
     <!-- nav-info --></nav>
 
     <div class="wrapper">

@@ -28,6 +28,8 @@ $(function () {
     });
 
     const inputLimit = new Date($('.input-limit').val());
+
+
     // タスク追加のmodal
     $(document).on('click', '.open-options', function (event) {
         event.preventDefault();
@@ -43,7 +45,6 @@ $(function () {
         transitionIn: 'fadeInUp', //表示される時のアニメーション
         transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
     });
-
     // タスク追加
     $('.add-btn').on('click', () => {
         const inputTask = $('.input-task').val();
@@ -106,17 +107,6 @@ $(function () {
         taskId = index;
     });
 
-    // タスク削除処理
-    $('.task-list').on('click', '.del-btn', (evt) => {
-        const isDelete = confirm('タスクを削除しますか？');
-        if (isDelete) {
-            $(evt.currentTarget).parent().parent()
-                .fadeOut(1000, () => {
-                    $(evt.currentTarget).parent().parent().remove();
-                });
-        }
-    });
-
 
     // タスク更新処理のmodal
     $(document).on('click', '.edit-task', function (event) {
@@ -165,12 +155,42 @@ $(function () {
             data: reqJson,
             dataType: "json",
         });
-        console.log(taskId);
         const taskList2 = $('.task-list').children().eq(taskId);
         taskList2.find('.task-info').text(intoEditTitle);
         taskList2.find('.task-info-main').text(intoEditDetails);
         taskList2.find('.into-limit').text('期限 : ' + trimT(intoEditLimit));
         $('#modal-options2').iziModal('close');
+    });
+
+
+    //削除modal
+    $(document).on('click', '.del-btn', function (event) {
+        event.preventDefault();
+        $('#modal-del').iziModal('open');
+    });
+    $('#modal-del').iziModal({
+        headerColor: '#26A69A', //ヘッダー部分の色
+        width: 1000, //横幅
+        padding: 50,
+        overlayColor: 'rgba(0, 0, 0, 0.5)', //モーダルの背景色
+        transitionIn: 'fadeInUp', //表示される時のアニメーション
+        transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
+    });
+    //削除処理
+    $('.del-yes').on('click', () => {
+        reqJson = {
+            index: taskId,
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/delete",
+            data: reqJson,
+            dataType: "json",
+        });
+        $('#modal-del').iziModal('close');
+    });
+    $('.del-no').on('click', () => {
+        $('#modal-del').iziModal('close');
     });
 })
 
