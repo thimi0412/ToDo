@@ -1,5 +1,5 @@
 #!/bin/bash
-mysql -u root -ppassw0rd <<EOF
+mysql -u root <<EOF
 CREATE TABLE test.todo (
   id INT NOT NULL AUTO_INCREMENT,
   user_name VARCHAR(45) NOT NULL,
