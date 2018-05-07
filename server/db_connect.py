@@ -60,6 +60,26 @@ def get_task():
     return row
 
 
+def get_task_btw(span):
+    conn, cur = connect()
+    if span == 'today':
+        span = 'DAY'
+    elif span == 'week':
+        span = 'WEEK'
+    elif span == 'month':
+        span = 'MONTH'
+
+
+    sql = '''
+        SELECT * FROM test.todo
+        WHERE task_limit between CURRENT_TIMESTAMP and CURRENT_TIMESTAMP + interval 1 {between};
+    '''.format(between=span)
+    cur.execute(sql)
+    row = cur.fetchall()
+
+    disconecrt(conn, cur)
+    return row
+
 def insert_task(Task):
     conn, cur = connect()
     sql = '''
@@ -105,7 +125,8 @@ def delete_task(index):
     return 'succcess'
 
 def main():
-    delete_task(1)
+    a = get_task_btw('today')
+    print(a)
 
 
 

@@ -8,20 +8,7 @@ $(function () {
     }).done(function (res) {
         for (let i of res.result) {
             // すでに存在するタスクを追加
-            $('.task-list').append(
-                `<li class='task'>
-                    <div class="task-text">
-                        <p class="task-info">${i.title}</p>
-                        <p class="task-info-main">${i.details}</p>
-                        <p class="into-limit">期限 : ${i.limit}</p>
-                    </div>
-                    <div class="task-btn">
-                        <p class="into-date">追加日 : ${i.insert}</p>
-                        <button class="del-btn">削除</button>
-                        <button class="edit-task">変更</button>
-                    </div>
-                </li>`
-            );
+            appendHTML(i);
         }
     }).fail(function (res) {
         console.log(res)
@@ -199,6 +186,59 @@ $(function () {
     $('.del-no').on('click', () => {
         $('#modal-del').iziModal('close');
     });
+
+
+    $('.today-task').on('click', () => {
+        $('.task-list').empty();
+        reqJson = {
+            span: 'today',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/filter",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            for (let i of res.result) {
+                // すでに存在するタスクを追加
+                appendHTML(i);
+            }
+        });
+    });
+    $('.week-task').on('click', () => {
+        $('.task-list').empty();
+        reqJson = {
+            span: 'week',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/filter",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            for (let i of res.result) {
+                // すでに存在するタスクを追加
+                appendHTML(i);
+            }
+        });
+    });
+    $('.month-task').on('click', () => {
+        $('.task-list').empty();
+        reqJson = {
+            span: 'month',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/filter",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            for (let i of res.result) {
+                // すでに存在するタスクを追加
+                appendHTML(i);
+            }
+        });
+    });
 })
 
 
@@ -252,4 +292,21 @@ function trimT(dateTime) {
 
 function addT(dateTime) {
     return dateTime[2] + 'T' + dateTime[3];
+}
+
+function appendHTML(resJson) {
+    $('.task-list').append(
+        `<li class='task'>
+            <div class="task-text">
+                <p class="task-info">${resJson.title}</p>
+                <p class="task-info-main">${resJson.details}</p>
+                <p class="into-limit">期限 : ${resJson.limit}</p>
+            </div>
+            <div class="task-btn">
+                <p class="into-date">追加日 : ${resJson.insert}</p>
+                <button class="del-btn">削除</button>
+                <button class="edit-task">変更</button>
+            </div>
+        </li>`
+    );
 }
