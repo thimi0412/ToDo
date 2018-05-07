@@ -70,7 +70,7 @@ def insert_task(Task):
     conn.commit()
 
     disconecrt(conn, cur)
-    return sql
+    return 'succcess'
 
 
 def update_task(Task, index):
@@ -83,7 +83,7 @@ def update_task(Task, index):
     conn.commit()
     disconecrt(conn, cur)
 
-    return sql
+    return 'succcess'
 
 
 def delete_task(index):

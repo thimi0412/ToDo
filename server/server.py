@@ -81,7 +81,7 @@ def set_task():
 
     task = Task.Task(title, details, limit, insert)
     res = db_connect.insert_task(task)
-    print(res)
+
     return make_response(json.dumps({'status': res}, ensure_ascii=False))
 
 
@@ -98,7 +98,7 @@ def update_task():
 
     task = Task.Task(title, details, limit, insert)
     res = db_connect.update_task(task, index)
-    print(res)
+
     return make_response(json.dumps({'status': res}, ensure_ascii=False))
 
 @api.route('/delete', methods=['POST'])
