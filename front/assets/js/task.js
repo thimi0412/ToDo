@@ -1,5 +1,32 @@
 let colortCnt = 0;
 $(function () {
+
+    $(window).load(function (event) {
+        event.preventDefault();
+        $('#modal-check').iziModal('open');
+
+        reqJson = {
+            span: 'today',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/filter",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            taskNum = res.result.length;
+            $('.message').text(`本日期限のタスクは${taskNum}件です`);
+        });
+    });
+    $('#modal-check').iziModal({
+        headerColor: '#26A69A', //ヘッダー部分の色
+        width: 1000, //横幅
+        padding: 50,
+        overlayColor: 'rgba(0, 0, 0, 0.5)', //モーダルの背景色
+        transitionIn: 'fadeInUp', //表示される時のアニメーション
+        transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
+    });
+
     // ajax通信開始
     $.ajax({
         type: "GET",

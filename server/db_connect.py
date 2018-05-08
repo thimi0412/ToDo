@@ -142,9 +142,7 @@ def delete_task(index):
 
 
 def main():
-    a = get_task_order('ASC')
-    for i in a:
-        print(i)
+    pass
 
 
 if __name__ == '__main__':

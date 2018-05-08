@@ -113,6 +113,16 @@ iframe {
     margin: 5px;
 }
 
+.del-yes {
+    padding: 5px;
+    border: solid 2px #5b8bd0;
+}
+
+.del-no {
+    padding: 5px;
+    border: solid 2px #5b8bd0;
+}
+
 .add-btn {
     border: solid 2px #5b8bd0;
     position: absolute;
