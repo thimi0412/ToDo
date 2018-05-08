@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 def connect():
     '''
     MySQLに接続する
@@ -12,6 +13,7 @@ def connect():
 
     cur = conn.cursor(buffered=True)
     return conn, cur
+
 
 def disconecrt(conn, cur):
     '''
@@ -84,7 +86,7 @@ def get_task_btw(span):
 
 def get_task_order(order):
     conn, cur = connect()
-    
+
     sql = '''
         SELECT * FROM test.todo ORDER BY task_limit {order}
     '''.format(order=order)
@@ -131,7 +133,6 @@ def delete_task(index):
 
     disconecrt(conn, cur)
 
-    
     conn, cur = connect()
     fix_auto_increment_del(conn, cur)
     conn, cur = connect()
@@ -139,11 +140,11 @@ def delete_task(index):
 
     return 'succcess'
 
+
 def main():
     a = get_task_order('ASC')
     for i in a:
         print(i)
-
 
 
 if __name__ == '__main__':
