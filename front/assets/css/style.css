@@ -7,6 +7,9 @@ html {
 ul {
     list-style: none;
 }
+body {
+    margin: 0 10%;
+}
 .head-info {
     font-family: 'Bangers', cursive;
     font-size: 50px;
@@ -28,9 +31,19 @@ ul {
     background: #f0f7ff;
     border: dashed 2px #5b8bd0;/*点線*/
 }
-.left-bar li {
+.left-bar button {
+    flex-direction: column;
     margin: 0; 
     padding: 0;
+}
+.side-task {
+    text-align: center;
+    font-size: 20px;
+}
+
+.side-task li{
+    margin: 10px;
+    border: solid 2px #5b8bd0;
 }
 
 .input-main {
@@ -101,7 +114,7 @@ ul {
 .task {
     animation: fadeIn 1s ease 0s 1 normal;
     font-size: 15px;
-    width: 700px;
+    width: 600px;
     height: 200px;
     border: solid 2px #5b8bd0;
     padding: 10px;
@@ -150,3 +163,4 @@ ul {
     float: right;
     margin: 20px;
 }
+

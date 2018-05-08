@@ -92,6 +92,28 @@ def get_filter_task():
     return make_response(json.dumps(res_json, ensure_ascii=False))
 
 
+@api.route('/order', methods=['POST'])
+def get_task_order():
+    order = request.form['order']
+
+    row = db_connect.get_task_order(order)
+
+    result = []
+    for i in row:
+        res_json = {
+            'title' : i[2],
+            'details': i[3],
+            'limit': str(i[4]),
+            'insert': str(i[5]),
+        }
+        result.append(res_json)
+
+    res_json = {'result': result}
+
+    return make_response(json.dumps(res_json, ensure_ascii=False))
+
+
+
 @api.route('/set', methods=['POST'])
 def set_task():
     '''

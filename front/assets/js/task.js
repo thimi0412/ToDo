@@ -239,6 +239,40 @@ $(function () {
             }
         });
     });
+    $('.asc').on('click', () => {
+        $('.task-list').empty();
+        reqJson = {
+            order: 'asc',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/order",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            for (let i of res.result) {
+                // すでに存在するタスクを追加
+                appendHTML(i);
+            }
+        });
+    });
+    $('.desc').on('click', () => {
+        $('.task-list').empty();
+        reqJson = {
+            order: 'desc',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/order",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            for (let i of res.result) {
+                // すでに存在するタスクを追加
+                appendHTML(i);
+            }
+        });
+    });
 })
 
 

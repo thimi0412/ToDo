@@ -51,7 +51,9 @@ def fix_auto_increment_add(conn, cur):
 def get_task():
     conn, cur = connect()
 
-    sql = "select * from test.todo"
+    sql = '''
+        SELECT * FROM test.todo
+    '''
 
     cur.execute(sql)
     row = cur.fetchall()
@@ -69,7 +71,6 @@ def get_task_btw(span):
     elif span == 'month':
         span = 'MONTH'
 
-
     sql = '''
         SELECT * FROM test.todo
         WHERE task_limit between CURRENT_TIMESTAMP and CURRENT_TIMESTAMP + interval 1 {between};
@@ -79,6 +80,20 @@ def get_task_btw(span):
 
     disconecrt(conn, cur)
     return row
+
+
+def get_task_order(order):
+    conn, cur = connect()
+    
+    sql = '''
+        SELECT * FROM test.todo ORDER BY task_limit {order}
+    '''.format(order=order)
+    cur.execute(sql)
+    row = cur.fetchall()
+
+    disconecrt(conn, cur)
+    return row
+
 
 def insert_task(Task):
     conn, cur = connect()
@@ -125,8 +140,9 @@ def delete_task(index):
     return 'succcess'
 
 def main():
-    a = get_task_btw('today')
-    print(a)
+    a = get_task_order('ASC')
+    for i in a:
+        print(i)
 
 
 
