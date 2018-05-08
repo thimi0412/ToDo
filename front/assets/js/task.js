@@ -1,4 +1,3 @@
-let colortCnt = 0;
 $(function () {
 
     // 本日が期限のタスクの件数をmodalで表示
