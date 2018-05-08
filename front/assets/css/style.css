@@ -130,7 +130,10 @@ iframe {
     position: absolute;
     right: 20px;
 }
-
+.task-list {
+    height: 820px;
+    overflow: auto;
+}
 .task {
     animation: fadeIn 1s ease 0s 1 normal;
     font-size: 20px;
