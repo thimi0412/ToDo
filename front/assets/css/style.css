@@ -6,6 +6,9 @@ html {
 }
 ul {
     list-style: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 body {
     margin: 0 10%;
@@ -45,6 +48,14 @@ body {
     margin: 10px;
     border: solid 2px #5b8bd0;
 }
+.side-task li:hover {
+    color: white;
+    background-color: rgb(24, 0, 241);
+}
+
+iframe {
+    border: solid 2px #5b8bd0;
+}
 
 .input-main {
     width: 50%;
@@ -75,6 +86,11 @@ body {
     padding: 5px;
     border: solid 2px #5b8bd0;
 }
+
+.edit-task:hover {
+    background-color: orange;
+}
+
 .edit-task-main {
     padding: 5px;
     border: solid 2px #5b8bd0;
@@ -83,6 +99,10 @@ body {
 .edit-limit {
     padding: 5px;
     border: solid 2px #5b8bd0;
+}
+
+.del-btn:hover {
+    background-color: orange;
 }
 
 .edit-btn {
@@ -113,7 +133,7 @@ body {
 
 .task {
     animation: fadeIn 1s ease 0s 1 normal;
-    font-size: 15px;
+    font-size: 20px;
     width: 600px;
     height: 200px;
     border: solid 2px #5b8bd0;
