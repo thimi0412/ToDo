@@ -1,10 +1,12 @@
 let colortCnt = 0;
 $(function () {
 
+    // 本日が期限のタスクの件数をmodalで表示
     $(window).load(function (event) {
         event.preventDefault();
         $('#modal-check').iziModal('open');
 
+        // リクエストを送るjsonを作成
         reqJson = {
             span: 'today',
         };
@@ -16,8 +18,11 @@ $(function () {
         }).done(function (res) {
             taskNum = res.result.length;
             $('.message').text(`本日期限のタスクは${taskNum}件です`);
+        }).fail(function (res) {
+            console.log(res)
         });
     });
+    // #modal-checkのオプション
     $('#modal-check').iziModal({
         headerColor: '#26A69A', //ヘッダー部分の色
         width: 1000, //横幅
@@ -27,30 +32,29 @@ $(function () {
         transitionOut: 'fadeOutDown' //非表示になる時のアニメーション
     });
 
-    // ajax通信開始
+
+    // すでに存在するタスクを全取得し表示
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/get",
         dataType: "json",
     }).done(function (res) {
         for (let i of res.result) {
-            // すでに存在するタスクを追加
+            // すでに存在するタスクを要素に追加
             appendHTML(i);
         }
     }).fail(function (res) {
         console.log(res)
     });
 
-    const inputLimit = new Date($('.input-limit').val());
-
 
     // タスク追加のmodal
     $(document).on('click', '.open-options', function (event) {
         event.preventDefault();
         $('#modal-options').iziModal('open');
-
         $('.input-limit').val(getNow());
     });
+    // #modal-optionsのオプション
     $('#modal-options').iziModal({
         headerColor: '#26A69A', //ヘッダー部分の色
         width: 1000, //横幅
@@ -66,6 +70,7 @@ $(function () {
         const inputLimit = new Date($('.input-limit').val());
         const nowDate = new Date(getNow());
 
+        // 期限が入力日より後日かチェック
         if (inputLimit.getTime() > nowDate.getTime()
             || getDate(getNow(inputLimit)) === getDate(getNow(nowDate))) {
             $('.task-list').append(
@@ -96,11 +101,16 @@ $(function () {
                 url: "http://localhost:8080/set",
                 data: reqJson,
                 dataType: "json",
+            }).done(function (res) {
+                $('#modal-options').iziModal('close');
+                $('.input-task').val('');
+                $('.input-task-main').val('');
+            }).fail(function (res) {
+                console.log(res)
             });
-            $('#modal-options').iziModal('close');
-            $('.input-task').val('');
-            $('.input-task-main').val('');
+            
         } else {
+            // 警告アラートを表示
             $('#modal-alert').iziModal('open');
             $('#modal-alert').iziModal({
                 headerColor: '#d43838',
@@ -113,6 +123,7 @@ $(function () {
 
         }
     });
+
 
     // タスクのidを取得
     let taskId;
@@ -144,6 +155,7 @@ $(function () {
         $('.edit-task-main').val(editDetails);
         $('.edit-limit').val(editLimit);
     });
+    // #modal-options2のオプション
     $('#modal-options2').iziModal({
         headerColor: '#26A69A', //ヘッダー部分の色
         width: 1000, //横幅
@@ -172,12 +184,16 @@ $(function () {
             url: "http://localhost:8080/update",
             data: reqJson,
             dataType: "json",
+        }).done(function (res) {
+            const taskList2 = $('.task-list').children().eq(taskId);
+            taskList2.find('.task-info').text(intoEditTitle);
+            taskList2.find('.task-info-main').text(intoEditDetails);
+            taskList2.find('.into-limit').text('期限 : ' + trimT(intoEditLimit));
+            $('#modal-options2').iziModal('close');
+        }).fail(function (res) {
+            console.log(res)
         });
-        const taskList2 = $('.task-list').children().eq(taskId);
-        taskList2.find('.task-info').text(intoEditTitle);
-        taskList2.find('.task-info-main').text(intoEditDetails);
-        taskList2.find('.into-limit').text('期限 : ' + trimT(intoEditLimit));
-        $('#modal-options2').iziModal('close');
+        
     });
 
 
@@ -196,6 +212,7 @@ $(function () {
     });
     //削除処理
     $('.del-yes').on('click', (evt) => {
+        // リクエストを送るjsonを作成
         reqJson = {
             index: taskId,
         };
@@ -204,19 +221,23 @@ $(function () {
             url: "http://localhost:8080/delete",
             data: reqJson,
             dataType: "json",
+        }).done(function (res) {
+            $('#modal-del').iziModal('close');
+            $('.task-list').children().eq(taskId).remove();
+        }).fail(function(res) {
+            console.log(res)
         });
-        $('#modal-del').iziModal('close');
-
-        $('.task-list').children().eq(taskId).remove();
-
     });
+    // Noの場合modalを閉じる
     $('.del-no').on('click', () => {
         $('#modal-del').iziModal('close');
     });
 
 
+    // 本日期限のタスクを表示
     $('.today-task').on('click', () => {
         $('.task-list').empty();
+        // リクエストを送るjsonを作成
         reqJson = {
             span: 'today',
         };
@@ -227,13 +248,18 @@ $(function () {
             dataType: "json",
         }).done(function (res) {
             for (let i of res.result) {
-                // すでに存在するタスクを追加
+                // タスクを追加
                 appendHTML(i);
             }
+        }).fail(function(res) {
+            console.log(res)
         });
     });
+
+    // 今週期限のタスクを表示
     $('.week-task').on('click', () => {
         $('.task-list').empty();
+        // リクエストを送るjsonを作成
         reqJson = {
             span: 'week',
         };
@@ -244,13 +270,18 @@ $(function () {
             dataType: "json",
         }).done(function (res) {
             for (let i of res.result) {
-                // すでに存在するタスクを追加
+                // タスクを追加
                 appendHTML(i);
             }
+        }).fail(function(res) {
+            console.log(res)
         });
     });
+
+    // 今月期限のタスクを追加
     $('.month-task').on('click', () => {
         $('.task-list').empty();
+        // リクエストを送るjsonを作成
         reqJson = {
             span: 'month',
         };
@@ -261,13 +292,18 @@ $(function () {
             dataType: "json",
         }).done(function (res) {
             for (let i of res.result) {
-                // すでに存在するタスクを追加
+                // タスクを追加
                 appendHTML(i);
             }
+        }).fail(function(res) {
+            console.log(res)
         });
     });
+
+    // タスクを期限日順に昇順で表示
     $('.asc').on('click', () => {
         $('.task-list').empty();
+        // リクエストを送るjsonを作成
         reqJson = {
             item : 'task_limit',
             order: 'asc',
@@ -279,13 +315,18 @@ $(function () {
             dataType: "json",
         }).done(function (res) {
             for (let i of res.result) {
-                // すでに存在するタスクを追加
+                // タスクを追加
                 appendHTML(i);
             }
+        }).fail(function(res) {
+            console.log(res)
         });
     });
+
+    // タスクを期限日順に降順で表示
     $('.desc').on('click', () => {
         $('.task-list').empty();
+        // リクエストを送るjsonを作成
         reqJson = {
             item: 'task_limit',
             order: 'desc',
@@ -297,13 +338,16 @@ $(function () {
             dataType: "json",
         }).done(function (res) {
             for (let i of res.result) {
-                // すでに存在するタスクを追加
+                // タスクを追加
                 appendHTML(i);
             }
         });
     });
+
+    // タスクを入力日順に昇順で表示
     $('.insert-asc').on('click', () => {
         $('.task-list').empty();
+        // リクエストを送るjsonを作成
         reqJson = {
             item: 'insert_date',
             order: 'asc',
@@ -318,10 +362,15 @@ $(function () {
                 // すでに存在するタスクを追加
                 appendHTML(i);
             }
+        }).fail(function(res) {
+            console.log(res)
         });
     });
+
+    // タスクを入力日順に降順で表示
     $('.insert-desc').on('click', () => {
         $('.task-list').empty();
+        // リクエストを送るjsonを作成
         reqJson = {
             item: 'insert_date',
             order: 'desc',
@@ -336,6 +385,8 @@ $(function () {
                 // すでに存在するタスクを追加
                 appendHTML(i);
             }
+        }).fail(function(res) {
+            console.log(res)
         });
     });
 })
@@ -383,16 +434,29 @@ function getDate(now = getNow()) {
     return yyyymmdd;
 }
 
-
+/**
+ * datetime-localからdatetime文字列に変換
+ * @param {string} dateTime 
+ */
 function trimT(dateTime) {
     dateTime = dateTime.split('T');
     return dateTime[0] + ' ' + dateTime[1];
 }
 
+
+/**
+ * datetime-local用の文字列を作成
+ * @param {string} dateTime 
+ */
 function addT(dateTime) {
     return dateTime[2] + 'T' + dateTime[3];
 }
 
+
+/**
+ * // タスクを作成
+ * @param {object} resJson 
+ */
 function appendHTML(resJson) {
     $('.task-list').append(
         `<li class='task'>
