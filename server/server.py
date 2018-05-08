@@ -103,9 +103,10 @@ def get_filter_task():
 
 @api.route('/order', methods=['POST'])
 def get_task_order():
+    item = request.form['item']
     order = request.form['order']
 
-    row = db_connect.get_task_order(order)
+    row = db_connect.get_task_order(order, item)
 
     result = []
     for i in row:

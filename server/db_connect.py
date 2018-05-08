@@ -84,12 +84,12 @@ def get_task_btw(span):
     return row
 
 
-def get_task_order(order):
+def get_task_order(order, item):
     conn, cur = connect()
 
     sql = '''
-        SELECT * FROM test.todo ORDER BY task_limit {order}
-    '''.format(order=order)
+        SELECT * FROM test.todo ORDER BY {item} {order}
+    '''.format(item=item, order=order)
     cur.execute(sql)
     row = cur.fetchall()
 

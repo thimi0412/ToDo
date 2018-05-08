@@ -242,6 +242,7 @@ $(function () {
     $('.asc').on('click', () => {
         $('.task-list').empty();
         reqJson = {
+            item : 'task_limit',
             order: 'asc',
         };
         $.ajax({
@@ -259,6 +260,43 @@ $(function () {
     $('.desc').on('click', () => {
         $('.task-list').empty();
         reqJson = {
+            item: 'task_limit',
+            order: 'desc',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/order",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            for (let i of res.result) {
+                // すでに存在するタスクを追加
+                appendHTML(i);
+            }
+        });
+    });
+    $('.insert-asc').on('click', () => {
+        $('.task-list').empty();
+        reqJson = {
+            item: 'insert_date',
+            order: 'asc',
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/order",
+            data: reqJson,
+            dataType: "json",
+        }).done(function (res) {
+            for (let i of res.result) {
+                // すでに存在するタスクを追加
+                appendHTML(i);
+            }
+        });
+    });
+    $('.insert-desc').on('click', () => {
+        $('.task-list').empty();
+        reqJson = {
+            item: 'insert_date',
             order: 'desc',
         };
         $.ajax({
