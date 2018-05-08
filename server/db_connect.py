@@ -51,6 +51,9 @@ def fix_auto_increment_add(conn, cur):
 
 
 def get_task():
+    '''
+    タスクを全て取得
+    '''
     conn, cur = connect()
 
     sql = '''
@@ -65,6 +68,9 @@ def get_task():
 
 
 def get_task_btw(span):
+    '''
+    指定期間内のタスクを表示
+    '''
     conn, cur = connect()
     if span == 'today':
         span = 'DAY'
@@ -85,6 +91,9 @@ def get_task_btw(span):
 
 
 def get_task_order(order, item):
+    '''
+    タスクの並び替え
+    '''
     conn, cur = connect()
 
     sql = '''
@@ -98,6 +107,9 @@ def get_task_order(order, item):
 
 
 def insert_task(Task):
+    '''
+    入力処理
+    '''
     conn, cur = connect()
     sql = '''
         INSERT INTO test.todo(user_name, task_title, task_details, task_limit, insert_date, is_complete, del_flg)
@@ -111,6 +123,9 @@ def insert_task(Task):
 
 
 def update_task(Task, index):
+    '''
+    更新処理
+    '''
     conn, cur = connect()
     sql = '''
         UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = '{limit}', update_date = now()
@@ -124,6 +139,9 @@ def update_task(Task, index):
 
 
 def delete_task(index):
+    '''
+    削除処理
+    '''
     conn, cur = connect()
     sql = '''
         DELETE FROM test.todo WHERE id = {id}
