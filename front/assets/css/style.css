@@ -142,7 +142,7 @@ iframe {
 }
 .task-list {
     height: 820px;
-    overflow: auto;
+    overflow-y: scroll;
 }
 .task {
     animation: fadeIn 1s ease 0s 1 normal;

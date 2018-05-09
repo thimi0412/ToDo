@@ -66,6 +66,7 @@ def get_user():
     result = []
     for i in row:
         res_json = {
+            'id': int(i[0]),
             'title': i[2],
             'details': i[3],
             'limit': str(i[4]),
@@ -89,6 +90,7 @@ def get_filter_task():
     result = []
     for i in row:
         res_json = {
+            'id': int(i[0]),
             'title': i[2],
             'details': i[3],
             'limit': str(i[4]),
@@ -114,6 +116,7 @@ def get_task_order():
     result = []
     for i in row:
         res_json = {
+            'id': int(i[0]),
             'title': i[2],
             'details': i[3],
             'limit': str(i[4]),

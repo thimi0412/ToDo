@@ -7,9 +7,9 @@ def connect():
     @return conn, cur
     '''
     conn = mysql.connector.connect(user='root',
-                                   password='',
-                                  host='localhost',
-                                  database='test')
+                                    password='',
+                                    host='localhost',
+                                    database='test')
 
     cur = conn.cursor(buffered=True)
     return conn, cur
@@ -130,7 +130,7 @@ def update_task(Task, index):
     sql = '''
         UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = '{limit}', update_date = now()
         WHERE id = {id}
-    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index+1)
+    '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index)
     cur.execute(sql)
     conn.commit()
     disconecrt(conn, cur)
@@ -145,7 +145,7 @@ def delete_task(index):
     conn, cur = connect()
     sql = '''
         DELETE FROM test.todo WHERE id = {id}
-    '''.format(id=index+1)
+    '''.format(id=index)
     cur.execute(sql)
     conn.commit()
 

@@ -75,6 +75,7 @@ $(function () {
             $('.task-list').append(
                 `<li class='task'>
                     <div class="task-text">
+                        <p class="task-id">${inputTask}</p>
                         <p class="task-info">${inputTask}</p>
                         <p class="task-info-main">${inputTaskMain}</p>
                         <p class="into-limit">期限 : ${
@@ -165,6 +166,7 @@ $(function () {
     });
     // タスク更新処理
     $('.edit-btn').on('click', () => {
+        const editId = $('.task-list').children().eq(taskId).find('.task-id').text();
         const intoEditTitle = $('.edit-main .edit-task').val();
         const intoEditDetails = $('.edit-main .edit-task-main').val();
         const intoEditLimit = $('.edit-main .edit-limit').val();
@@ -176,7 +178,7 @@ $(function () {
             details: intoEditDetails,
             limit: intoEditLimit,
             insert: intoEditInsert,
-            index : taskId,
+            index : editId,
         };
         $.ajax({
             type: "POST",
@@ -212,8 +214,9 @@ $(function () {
     //削除処理
     $('.del-yes').on('click', (evt) => {
         // リクエストを送るjsonを作成
+        const delId = $('.task-list').children().eq(taskId).find('.task-id').text();
         reqJson = {
-            index: taskId,
+            index: delId,
         };
         $.ajax({
             type: "POST",
@@ -468,6 +471,7 @@ function appendHTML(resJson) {
                 <p class="into-date">追加日 : ${resJson.insert}</p>
                 <button class="del-btn">削除</button>
                 <button class="edit-task">変更</button>
+                <p class="task-id">${resJson.id}</p>
             </div>
         </li>`
     );
