@@ -1,6 +1,6 @@
 # coding: UTF-8
 
-from flask import Flask, make_response, request
+from flask import Flask, make_response, request, render_template
 import json
 import db_connect
 import Task
@@ -54,6 +54,11 @@ def after_request(response):
                         'GET,PUT,POST,DELETE,OPTIONS')
 
     return response
+
+
+@api.route('/')
+def index():
+    return render_template('index.html')
 
 
 @api.route('/get', methods=['GET'])
