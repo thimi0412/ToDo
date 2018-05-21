@@ -7,9 +7,9 @@ def connect():
     @return conn, cur
     '''
     conn = mysql.connector.connect(user='root',
-                                    password='',
-                                    host='localhost',
-                                    database='test')
+                                    password='Skou_0412',
+                                    host='127.0.0.1',
+                                    database='todo')
 
     cur = conn.cursor(buffered=True)
     return conn, cur
@@ -29,7 +29,7 @@ def fix_auto_increment_del(conn, cur):
     連番振り直し(削除)
     '''
     sql = '''
-        alter table test.todo drop column id;
+        alter table todo.task drop column id;
         '''
     cur.execute(sql)
     conn.commit()
@@ -42,7 +42,7 @@ def fix_auto_increment_add(conn, cur):
     連番振り直し(追加)
     '''
     sql = '''
-    alter table test.todo add id int(11) primary key not null auto_increment first;
+    alter table todo.task add id int(11) primary key not null auto_increment first;
     '''
     cur.execute(sql)
     conn.commit()
@@ -57,7 +57,7 @@ def get_task():
     conn, cur = connect()
 
     sql = '''
-        SELECT * FROM test.todo
+        SELECT * FROM todo.task
     '''
 
     cur.execute(sql)
@@ -80,7 +80,7 @@ def get_task_btw(span):
         span = 'MONTH'
 
     sql = '''
-        SELECT * FROM test.todo
+        SELECT * FROM todo.task
         WHERE task_limit between CURRENT_TIMESTAMP and CURRENT_TIMESTAMP + interval 1 {between};
     '''.format(between=span)
     cur.execute(sql)
@@ -97,7 +97,7 @@ def get_task_order(order, item):
     conn, cur = connect()
 
     sql = '''
-        SELECT * FROM test.todo ORDER BY {item} {order}
+        SELECT * FROM todo.task ORDER BY {item} {order}
     '''.format(item=item, order=order)
     cur.execute(sql)
     row = cur.fetchall()
@@ -112,7 +112,7 @@ def insert_task(Task):
     '''
     conn, cur = connect()
     sql = '''
-        INSERT INTO test.todo(user_name, task_title, task_details, task_limit, insert_date, is_complete, del_flg)
+        INSERT INTO todo.task(user_name, task_title, task_details, task_limit, insert_date)
         VALUES('{user_name}', '{title}', '{details}', '{limit}', now(), '0', '0')
     '''.format(user_name=Task.user_name, title=Task.title, details=Task.details, limit=Task.limit)
     cur.execute(sql)
@@ -128,7 +128,7 @@ def update_task(Task, index):
     '''
     conn, cur = connect()
     sql = '''
-        UPDATE test.todo SET task_title = '{title}', task_details = '{details}', task_limit = '{limit}', update_date = now()
+        UPDATE todo.task SET task_title = '{title}', task_details = '{details}', task_limit = '{limit}', update_date = now()
         WHERE id = {id}
     '''.format(title=Task.title, details=Task.details, limit=Task.limit, id=index)
     cur.execute(sql)
@@ -144,7 +144,7 @@ def delete_task(index):
     '''
     conn, cur = connect()
     sql = '''
-        DELETE FROM test.todo WHERE id = {id}
+        DELETE FROM todo.task WHERE id = {id}
     '''.format(id=index)
     cur.execute(sql)
     conn.commit()

@@ -11,7 +11,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/filter",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -35,7 +35,7 @@ $(function () {
     // すでに存在するタスクを全取得し表示
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/get",
+        url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/get",
         dataType: "json",
     }).done(function (res) {
         for (let i of res.result) {
@@ -98,7 +98,7 @@ $(function () {
             };
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/set",
+                url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/set",
                 data: reqJson,
                 dataType: "json",
             }).done(function (res) {
@@ -182,7 +182,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/update",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/update",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -220,7 +220,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/delete",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/delete",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -245,7 +245,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/filter",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -267,7 +267,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/filter",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -289,7 +289,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/filter",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -312,7 +312,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/order",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -335,7 +335,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/order",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -356,7 +356,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/order",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -379,7 +379,7 @@ $(function () {
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/order",
+            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
