@@ -66,8 +66,8 @@ $(function () {
     });
     // タスク追加
     $('.add-btn').on('click', () => {
-        const inputTask = $('.input-task').val();
-        const inputTaskMain = $('.input-task-main').val();
+        const inputTask = $('.input-task').val().replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').replace(/'|"/g,'');
+        const inputTaskMain = $('.input-task-main').val().replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').replace(/'|"/g,'');
         const inputLimit = new Date($('.input-limit').val());
         const nowDate = new Date(getNow());
 
@@ -168,8 +168,8 @@ $(function () {
     // タスク更新処理
     $('.edit-btn').on('click', () => {
         const editId = $('.task-list').children().eq(taskId).find('.task-id').text();
-        const intoEditTitle = $('.edit-main .edit-task').val();
-        const intoEditDetails = $('.edit-main .edit-task-main').val();
+        const intoEditTitle = $('.edit-main .edit-task').val().replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').replace(/'|"/g,'');
+        const intoEditDetails = $('.edit-main .edit-task-main').val().replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').replace(/'|"/g,'');
         const intoEditLimit = $('.edit-main .edit-limit').val();
         const intoEditInsert = new Date(getNow());
 
