@@ -67,7 +67,7 @@ def get_user():
     タスク全取得
     '''
     row = db_connect.get_task()
-    
+    result = []
     for i in row:
         res_json = {
             'id': int(i[0]),
