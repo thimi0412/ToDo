@@ -113,7 +113,7 @@ def insert_task(Task):
     conn, cur = connect()
     sql = '''
         INSERT INTO todo.task(user_name, task_title, task_details, task_limit, insert_date)
-        VALUES('{user_name}', '{title}', '{details}', '{limit}', now(), '0', '0')
+        VALUES('{user_name}', '{title}', '{details}', '{limit}', now())
     '''.format(user_name=Task.user_name, title=Task.title, details=Task.details, limit=Task.limit)
     cur.execute(sql)
     conn.commit()
