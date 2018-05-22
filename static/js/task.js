@@ -1,4 +1,5 @@
 const mainURL = window.mainURL;
+console.log(mainURL);
 $(function () {
 
     // 本日が期限のタスクの件数をmodalで表示
@@ -76,7 +77,6 @@ $(function () {
             $('.task-list').append(
                 `<li class='task'>
                     <div class="task-text">
-                        <p class="task-id">${inputTask}</p>
                         <p class="task-info">${inputTask}</p>
                         <p class="task-info-main">${inputTaskMain}</p>
                         <p class="into-limit">期限 : ${
