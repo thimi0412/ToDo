@@ -1,3 +1,4 @@
+const mainURL = window.mainURL;
 $(function () {
 
     // 本日が期限のタスクの件数をmodalで表示
@@ -10,10 +11,10 @@ $(function () {
             span: 'today',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
+            type: 'POST',
+            url: mainURL + 'filter',
             data: reqJson,
-            dataType: "json",
+            dataType: 'json',
         }).done(function (res) {
             taskNum = res.result.length;
             $('.message').text(`本日期限のタスクは${taskNum}件です`);
@@ -34,9 +35,9 @@ $(function () {
 
     // すでに存在するタスクを全取得し表示
     $.ajax({
-        type: "GET",
-        url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/get",
-        dataType: "json",
+        type: 'GET',
+        url: mainURL + 'get',
+        dataType: 'json',
     }).done(function (res) {
         for (let i of res.result) {
             // すでに存在するタスクを要素に追加
@@ -97,10 +98,10 @@ $(function () {
                 insert: nowDate,
             };
             $.ajax({
-                type: "POST",
-                url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/set",
+                type: 'POST',
+                url: mainURL + 'set',
                 data: reqJson,
-                dataType: "json",
+                dataType: 'json',
             }).done(function (res) {
                 $('#modal-options').iziModal('close');
                 $('.input-task').val('');
@@ -181,10 +182,10 @@ $(function () {
             index: editId,
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/update",
+            type: 'POST',
+            url: mainURL + 'update',
             data: reqJson,
-            dataType: "json",
+            dataType: 'json',
         }).done(function (res) {
             const taskList2 = $('.task-list').children().eq(taskId);
             taskList2.find('.task-info').text(intoEditTitle);
@@ -219,8 +220,8 @@ $(function () {
             index: delId,
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/delete",
+            type: 'POST',
+            url: mainURL + 'delete',
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -244,10 +245,10 @@ $(function () {
             span: 'today',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
+            type: 'POST',
+            url: mainURL + 'filter',
             data: reqJson,
-            dataType: "json",
+            dataType: 'json',
         }).done(function (res) {
             for (let i of res.result) {
                 // タスクを追加
@@ -266,8 +267,8 @@ $(function () {
             span: 'week',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
+            type: 'POST',
+            url: mainURL + 'filter',
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -288,8 +289,8 @@ $(function () {
             span: 'month',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/filter",
+            type: 'POST',
+            url: mainURL + 'filter',
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -311,8 +312,8 @@ $(function () {
             order: 'asc',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
+            type: 'POST',
+            url: mainURL + 'order',
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
@@ -334,10 +335,10 @@ $(function () {
             order: 'desc',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
+            type: 'POST',
+            url: mainURL + 'order',
             data: reqJson,
-            dataType: "json",
+            dataType: 'json',
         }).done(function (res) {
             for (let i of res.result) {
                 // タスクを追加
@@ -355,10 +356,10 @@ $(function () {
             order: 'asc',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
+            type: 'POST',
+            url: mainURL+ 'order',
             data: reqJson,
-            dataType: "json",
+            dataType: 'json',
         }).done(function (res) {
             for (let i of res.result) {
                 // すでに存在するタスクを追加
@@ -378,8 +379,8 @@ $(function () {
             order: 'desc',
         };
         $.ajax({
-            type: "POST",
-            url: "https://ec2-18-219-46-82.us-east-2.compute.amazonaws.com:8080/order",
+            type: 'POST',
+            url: mainURL + 'order',
             data: reqJson,
             dataType: "json",
         }).done(function (res) {
