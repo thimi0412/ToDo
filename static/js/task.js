@@ -8,7 +8,7 @@ $(function () {
         $('#modal-check').iziModal('open');
 
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             span: 'today',
         };
         $.ajax({
@@ -91,7 +91,7 @@ $(function () {
             );
 
             // リクエストを送るjsonを作成
-            reqJson = {
+            const reqJson = {
                 title: inputTask,
                 details: inputTaskMain,
                 limit: inputLimit,
@@ -174,7 +174,7 @@ $(function () {
         const intoEditInsert = new Date(getNow());
 
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             title: intoEditTitle,
             details: intoEditDetails,
             limit: intoEditLimit,
@@ -216,7 +216,7 @@ $(function () {
     $('.del-yes').on('click', (evt) => {
         // リクエストを送るjsonを作成
         const delId = $('.task-list').children().eq(taskId).find('.task-id').text();
-        reqJson = {
+        const reqJson = {
             index: delId,
         };
         $.ajax({
@@ -241,7 +241,7 @@ $(function () {
     $('.today-task').on('click', () => {
         $('.task-list').empty();
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             span: 'today',
         };
         $.ajax({
@@ -263,7 +263,7 @@ $(function () {
     $('.week-task').on('click', () => {
         $('.task-list').empty();
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             span: 'week',
         };
         $.ajax({
@@ -285,7 +285,7 @@ $(function () {
     $('.month-task').on('click', () => {
         $('.task-list').empty();
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             span: 'month',
         };
         $.ajax({
@@ -307,7 +307,7 @@ $(function () {
     $('.asc').on('click', () => {
         $('.task-list').empty();
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             item: 'task_limit',
             order: 'asc',
         };
@@ -330,7 +330,7 @@ $(function () {
     $('.desc').on('click', () => {
         $('.task-list').empty();
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             item: 'task_limit',
             order: 'desc',
         };
@@ -351,7 +351,7 @@ $(function () {
     $('.insert-asc').on('click', () => {
         $('.task-list').empty();
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             item: 'insert_date',
             order: 'asc',
         };
@@ -374,7 +374,7 @@ $(function () {
     $('.insert-desc').on('click', () => {
         $('.task-list').empty();
         // リクエストを送るjsonを作成
-        reqJson = {
+        const reqJson = {
             item: 'insert_date',
             order: 'desc',
         };

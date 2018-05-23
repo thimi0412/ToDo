@@ -110,7 +110,7 @@ def get_filter_task():
 @api.route('/order', methods=['POST'])
 def get_task_order():
     '''
-    並び替えたをかけたタスクを表示
+    並び替えたを行なったタスクを表示
     '''
     item = request.form['item']
     order = request.form['order']
