@@ -3,7 +3,7 @@
 from flask import Flask, make_response, request, render_template
 import json
 import db_connect
-import Task
+from Task import Task
 
 api = Flask(__name__)
 
@@ -143,7 +143,7 @@ def set_task():
     limit = format_date(request.form['limit'])
     insert = format_date(request.form['insert'])
 
-    task = Task.Task(title, details, limit, insert)
+    task = Task(title, details, limit, insert)
     res = db_connect.insert_task(task)
 
     return make_response(json.dumps({'status': res}, ensure_ascii=False))
@@ -160,7 +160,7 @@ def update_task():
     insert = format_date(request.form['insert'])
     index = int(request.form['index'])
 
-    task = Task.Task(title, details, limit, insert)
+    task = Task(title, details, limit, insert)
     res = db_connect.update_task(task, index)
 
     return make_response(json.dumps({'status': res}, ensure_ascii=False))
