@@ -240,157 +240,43 @@ $(function () {
     // 本日期限のタスクを表示
     $('.today-task').on('click', () => {
         $('.task-list').empty();
-        // リクエストを送るjsonを作成
-        const reqJson = {
-            span: 'today',
-        };
-        $.ajax({
-            type: 'POST',
-            url: mainURL + 'filter',
-            data: reqJson,
-            dataType: 'json',
-        }).done(function (res) {
-            for (let i of res.result) {
-                // タスクを追加
-                appendHTML(i);
-            }
-        }).fail(function (res) {
-            console.log(res)
-        });
+        filterTask('today');
     });
 
     // 今週期限のタスクを表示
     $('.week-task').on('click', () => {
         $('.task-list').empty();
-        // リクエストを送るjsonを作成
-        const reqJson = {
-            span: 'week',
-        };
-        $.ajax({
-            type: 'POST',
-            url: mainURL + 'filter',
-            data: reqJson,
-            dataType: "json",
-        }).done(function (res) {
-            for (let i of res.result) {
-                // タスクを追加
-                appendHTML(i);
-            }
-        }).fail(function (res) {
-            console.log(res)
-        });
+        filterTask('week');
     });
 
     // 今月期限のタスクを追加
     $('.month-task').on('click', () => {
         $('.task-list').empty();
-        // リクエストを送るjsonを作成
-        const reqJson = {
-            span: 'month',
-        };
-        $.ajax({
-            type: 'POST',
-            url: mainURL + 'filter',
-            data: reqJson,
-            dataType: "json",
-        }).done(function (res) {
-            for (let i of res.result) {
-                // タスクを追加
-                appendHTML(i);
-            }
-        }).fail(function (res) {
-            console.log(res)
-        });
+        filterTask('month');
     });
 
     // タスクを期限日順に昇順で表示
     $('.asc').on('click', () => {
         $('.task-list').empty();
-        // リクエストを送るjsonを作成
-        const reqJson = {
-            item: 'task_limit',
-            order: 'asc',
-        };
-        $.ajax({
-            type: 'POST',
-            url: mainURL + 'order',
-            data: reqJson,
-            dataType: "json",
-        }).done(function (res) {
-            for (let i of res.result) {
-                // タスクを追加
-                appendHTML(i);
-            }
-        }).fail(function (res) {
-            console.log(res)
-        });
+        orderTask('task_limit', 'asc')
     });
 
     // タスクを期限日順に降順で表示
     $('.desc').on('click', () => {
         $('.task-list').empty();
-        // リクエストを送るjsonを作成
-        const reqJson = {
-            item: 'task_limit',
-            order: 'desc',
-        };
-        $.ajax({
-            type: 'POST',
-            url: mainURL + 'order',
-            data: reqJson,
-            dataType: 'json',
-        }).done(function (res) {
-            for (let i of res.result) {
-                // タスクを追加
-                appendHTML(i);
-            }
-        });
+        orderTask('task_limit', 'desc')
     });
 
     // タスクを入力日順に昇順で表示
     $('.insert-asc').on('click', () => {
         $('.task-list').empty();
-        // リクエストを送るjsonを作成
-        const reqJson = {
-            item: 'insert_date',
-            order: 'asc',
-        };
-        $.ajax({
-            type: 'POST',
-            url: mainURL+ 'order',
-            data: reqJson,
-            dataType: 'json',
-        }).done(function (res) {
-            for (let i of res.result) {
-                // すでに存在するタスクを追加
-                appendHTML(i);
-            }
-        }).fail(function (res) {
-            console.log(res)
-        });
+        orderTask('insert_date', 'asc');
     });
 
     // タスクを入力日順に降順で表示
     $('.insert-desc').on('click', () => {
         $('.task-list').empty();
-        // リクエストを送るjsonを作成
-        const reqJson = {
-            item: 'insert_date',
-            order: 'desc',
-        };
-        $.ajax({
-            type: 'POST',
-            url: mainURL + 'order',
-            data: reqJson,
-            dataType: "json",
-        }).done(function (res) {
-            for (let i of res.result) {
-                // すでに存在するタスクを追加
-                appendHTML(i);
-            }
-        }).fail(function (res) {
-            console.log(res)
-        });
+        orderTask('insert_date', 'desc');
     });
 })
 
@@ -476,4 +362,45 @@ function appendHTML(resJson) {
             </div>
         </li>`
     );
+}
+
+function orderTask(item, order) {
+    // リクエストを送るjsonを作成
+    const reqJson = {
+        item: item,
+        order: oder,
+    };
+    $.ajax({
+        type: 'POST',
+        url: mainURL + 'order',
+        data: reqJson,
+        dataType: "json",
+    }).done(function (res) {
+        for (let i of res.result) {
+            // すでに存在するタスクを追加
+            appendHTML(i);
+        }
+    }).fail(function (res) {
+        console.log(res)
+    });
+}
+
+
+function filterTask(span) {
+    const reqJson = {
+        span: span,
+    };
+    $.ajax({
+        type: 'POST',
+        url: mainURL + 'filter',
+        data: reqJson,
+        dataType: "json",
+    }).done(function (res) {
+        for (let i of res.result) {
+            // タスクを追加
+            appendHTML(i);
+        }
+    }).fail(function (res) {
+        console.log(res)
+    });
 }

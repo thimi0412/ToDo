@@ -58,6 +58,9 @@ def after_request(response):
 
 @api.route('/')
 def index():
+    '''
+    htmlを返す
+    '''
     return render_template('index.html')
 
 
@@ -87,7 +90,7 @@ def get_user():
 def get_filter_task():
     span = request.form['span']
     '''
-    フィルターをかけたタスクを表示
+    フィルターをかけたタスクを取得
     '''
     row = db_connect.get_task_btw(span)
 
@@ -110,7 +113,7 @@ def get_filter_task():
 @api.route('/order', methods=['POST'])
 def get_task_order():
     '''
-    並び替えたを行なったタスクを表示
+    並び替えたを行なったタスクを取得
     '''
     item = request.form['item']
     order = request.form['order']
