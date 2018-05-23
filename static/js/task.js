@@ -364,6 +364,12 @@ function appendHTML(resJson) {
     );
 }
 
+
+/**
+ * // タスクを並び替えて追加
+ * @param {string} item task_limit OR insert_date
+ * @param {string} order asc OR desc
+ */
 function orderTask(item, order) {
     // リクエストを送るjsonを作成
     const reqJson = {
@@ -385,7 +391,10 @@ function orderTask(item, order) {
     });
 }
 
-
+/**
+ * // タスクをフィルターして追加
+ * @param {string} span : today week month
+ */
 function filterTask(span) {
     const reqJson = {
         span: span,
