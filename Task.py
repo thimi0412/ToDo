@@ -1,6 +1,9 @@
 # coding: UTF-8
 
 class Task:
+    '''
+    タスクを扱うクラス
+    '''
     def __init__(self, title, details, limit, insert, user_name='shimizu'):
         self.__title = title
         self.__details = details
