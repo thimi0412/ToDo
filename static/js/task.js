@@ -129,11 +129,11 @@ $(function () {
     // タスクのidを取得
     let taskId;
     $('.task-list').on('click', 'li .edit-task', (evt) => {
-        var index = $('li .edit-task').index(evt.currentTarget);
+        let index = $('li .edit-task').index(evt.currentTarget);
         taskId = index;
     });
     $('.task-list').on('click', 'li .del-btn', (evt) => {
-        var index = $('li .del-btn').index(evt.currentTarget);
+        let index = $('li .del-btn').index(evt.currentTarget);
         taskId = index;
     });
 
